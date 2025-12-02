@@ -1,0 +1,15 @@
+javafx:
+  title: plc monitor
+  appicons: /icon/icon.png
+  stage:
+    width: 900
+    height: 600
+    style: DECORATED  # javafx.stage.StageStyle [DECORATED, UNDECORATED, TRANSPARENT, UTILITY, UNIFIED]
+    resizable: true
+
+# 日志配置
+logging:
+  config: classpath:logback.xml
+  level:
+    com.goldwind: info
+    org.springframework: warn

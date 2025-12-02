@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--group, 每组最多100个地址，分组采集-->
+    <group index="1" start="0" end="99">
+        <!--address, 采集地址-->
+        <!--convert, 类型转换，1: 0~65535 ushort（P_AB）; 2: -32767~32768（PM_AB）-->
+        <!--type, 1: int; 2: double; 3: bool(显示指示灯，true：绿，false：红); 4:枚举-->
+        <!--unit, 单位-->
+        <!--multiple, 采集数据根据type类型转换后，需缩小的倍数-->
+        <!--show, 根据序号展示在那个数据分栏中-->
+        <!--iec, 地址数据对应iec标识，用于国际化-->
+        <!--fnc_lab, 对应标签显示的类型，1：可视化文本（只读），2：按钮（可写）-->
+
+<!--        <location address="6" convert="1" type="1" unit="" multiple="1" show="1" iec="iec06"/>-->
+<!--        <location address="8" convert="1" type="1" unit="" multiple="1" show="1" iec="iec08"/>-->
+
+
+        //------------zh添加   start --------------//
+        <location address="2" convert="1" type="4" unit="" multiple="1" show="4" iec="iec2" fnc_lab="1" >
+            <!--enum, state：根据地址读取的数据，iec：读取的数值对应的iec标识-->
+            <enum state="0" iec="iec2.enum0"/>
+            <enum state="1" iec="iec2.enum1"/>
+            <enum state="2" iec="iec2.enum2"/>
+            <enum state="3" iec="iec2.enum3"/>
+            <enum state="4" iec="iec2.enum4"/>
+            <enum state="5" iec="iec2.enum5"/>
+            <enum state="6" iec="iec2.enum6"/>
+            <enum state="7" iec="iec2.enum7"/>
+            <enum state="8" iec="iec2.enum8"/>
+            <enum state="9" iec="iec2.enum9"/>
+            <enum state="10" iec="iec2.enum10"/>
+            <enum state="11" iec="iec2.enum11"/>
+            <enum state="12" iec="iec2.enum12"/>
+            <enum state="13" iec="iec2.enum13"/>
+            <enum state="14" iec="iec2.enum14"/>
+        </location>
+        <location address="3" convert="1" type="4" unit="" multiple="1" show="4" iec="iec3" fnc_lab="1" >
+            <enum state="0" iec="iec3.enum0"/>
+            <enum state="1" iec="iec3.enum1"/>
+            <enum state="2" iec="iec3.enum2"/>
+            <enum state="3" iec="iec3.enum3"/>
+            <enum state="4" iec="iec3.enum4"/>
+            <enum state="5" iec="iec3.enum5"/>
+            <enum state="6" iec="iec3.enum6"/>
+            <enum state="7" iec="iec3.enum7"/>
+            <enum state="8" iec="iec3.enum8"/>
+            <enum state="9" iec="iec3.enum9"/>
+            <enum state="10" iec="iec3.enum10"/>
+            <enum state="11" iec="iec3.enum11"/>
+            <enum state="12" iec="iec3.enum12"/>
+            <enum state="13" iec="iec3.enum13"/>
+            <enum state="14" iec="iec3.enum14"/>
+        </location>
+        <location address="4" convert="1" type="4" unit="" multiple="1" show="4" iec="iec4" fnc_lab="1" >
+            <enum state="0" iec="iec4.enum0"/>
+            <enum state="1" iec="iec4.enum1"/>
+            <enum state="2" iec="iec4.enum2"/>
+            <enum state="3" iec="iec4.enum3"/>
+            <enum state="4" iec="iec4.enum4"/>
+            <enum state="5" iec="iec4.enum5"/>
+            <enum state="6" iec="iec4.enum6"/>
+            <enum state="7" iec="iec4.enum7"/>
+            <enum state="8" iec="iec4.enum8"/>
+            <enum state="9" iec="iec4.enum9"/>
+            <enum state="10" iec="iec4.enum10"/>
+            <enum state="11" iec="iec4.enum11"/>
+            <enum state="12" iec="iec4.enum12"/>
+            <enum state="13" iec="iec4.enum13"/>
+            <enum state="14" iec="iec4.enum14"/>
+        </location>
+        <location address="5" convert="1" type="4" unit="" multiple="1" show="20" iec="iec5" fnc_lab="1" >
+            <enum state="0" iec="iec5.enum0"/>
+            <enum state="1" iec="iec5.enum1"/>
+            <enum state="2" iec="iec5.enum2"/>
+            <enum state="3" iec="iec5.enum3"/>
+            <enum state="4" iec="iec5.enum4"/>
+            <enum state="5" iec="iec5.enum5"/>
+        </location>
+        <location address="6" convert="1" type="4" unit="" multiple="1" show="5" iec="iec6" fnc_lab="1" >
+            <enum state="0" iec="iec6.enum0"/>
+            <enum state="1" iec="iec6.enum1"/>
+            <enum state="2" iec="iec6.enum2"/>
+            <enum state="3" iec="iec6.enum3"/>
+            <enum state="4" iec="iec6.enum4"/>
+            <enum state="5" iec="iec6.enum5"/>
+            <enum state="6" iec="iec6.enum6"/>
+            <enum state="7" iec="iec6.enum7"/>
+            <enum state="8" iec="iec6.enum8"/>
+            <enum state="9" iec="iec6.enum9"/>
+            <enum state="10" iec="iec6.enum10"/>
+            <enum state="11" iec="iec6.enum11"/>
+            <enum state="12" iec="iec6.enum12"/>
+            <enum state="13" iec="iec6.enum13"/>
+            <enum state="14" iec="iec6.enum14"/>
+            <enum state="15" iec="iec6.enum15"/>
+        </location>
+        <location address="7" convert="1" type="4" unit="" multiple="1" show="18" iec="iec7" fnc_lab="1" >
+            <!--enum, state：根据地址读取的数据，iec：读取的数值对应的iec标识-->
+            <enum state="0" iec="iec7.enum0"/>
+            <enum state="1" iec="iec7.enum1"/>
+            <enum state="2" iec="iec7.enum2"/>
+            <enum state="3" iec="iec7.enum3"/>
+            <enum state="4" iec="iec7.enum4"/>
+            <enum state="5" iec="iec7.enum5"/>
+        </location>
+        <location address="8" convert="1" type="4" unit="" multiple="1" show="9" iec="iec8" fnc_lab="1" >
+            <enum state="0" iec="iec8.enum0"/>
+            <enum state="1" iec="iec8.enum1"/>
+            <enum state="2" iec="iec8.enum2"/>
+            <enum state="3" iec="iec8.enum3"/>
+            <enum state="4" iec="iec8.enum4"/>
+            <enum state="5" iec="iec8.enum5"/>
+            <enum state="6" iec="iec8.enum6"/>
+            <enum state="7" iec="iec8.enum7"/>
+            <enum state="8" iec="iec8.enum8"/>
+            <enum state="9" iec="iec8.enum9"/>
+            <enum state="10" iec="iec8.enum10"/>
+            <enum state="11" iec="iec8.enum11"/>
+            <enum state="12" iec="iec8.enum12"/>
+            <enum state="13" iec="iec8.enum13"/>
+            <enum state="14" iec="iec8.enum14"/>
+            <enum state="15" iec="iec8.enum15"/>
+        </location>
+        <location address="9" convert="1" type="4" unit="" multiple="1" show="1" iec="iec9" fnc_lab="1" >
+            <enum state="0" iec="iec9.enum0"/>
+            <enum state="1" iec="iec9.enum1"/>
+            <enum state="2" iec="iec9.enum2"/>
+            <enum state="3" iec="iec9.enum3"/>
+            <enum state="4" iec="iec9.enum4"/>
+            <enum state="5" iec="iec9.enum5"/>
+            <enum state="6" iec="iec9.enum6"/>
+            <enum state="7" iec="iec9.enum7"/>
+            <enum state="8" iec="iec9.enum8"/>
+            <enum state="9" iec="iec9.enum9"/>
+            <enum state="10" iec="iec9.enum10"/>
+            <enum state="11" iec="iec9.enum11"/>
+            <enum state="12" iec="iec9.enum12"/>
+            <enum state="13" iec="iec9.enum13"/>
+        </location>
+        <location address="10" convert="1" type="4" unit="" multiple="1" show="20" iec="iec10" fnc_lab="1" >
+            <enum state="0" iec="iec10.enum0"/>
+            <enum state="1" iec="iec10.enum1"/>
+            <enum state="2" iec="iec10.enum2"/>
+            <enum state="3" iec="iec10.enum3"/>
+            <enum state="4" iec="iec10.enum4"/>
+            <enum state="5" iec="iec10.enum5"/>
+            <enum state="6" iec="iec10.enum6"/>
+            <enum state="7" iec="iec10.enum7"/>
+            <enum state="8" iec="iec10.enum8"/>
+            <enum state="9" iec="iec10.enum9"/>
+            <enum state="10" iec="iec10.enum10"/>
+            <enum state="11" iec="iec10.enum11"/>
+            <enum state="12" iec="iec10.enum12"/>
+            <enum state="13" iec="iec10.enum13"/>
+            <enum state="14" iec="iec10.enum14"/>
+        </location>
+        <location address="11" convert="1" type="4" unit="" multiple="1" show="19" iec="iec11" fnc_lab="1" >
+            <enum state="0" iec="iec11.enum0"/>
+            <enum state="1" iec="iec11.enum1"/>
+            <enum state="2" iec="iec11.enum2"/>
+            <enum state="3" iec="iec11.enum3"/>
+            <enum state="4" iec="iec11.enum4"/>
+            <enum state="5" iec="iec11.enum5"/>
+            <enum state="6" iec="iec11.enum6"/>
+            <enum state="7" iec="iec11.enum7"/>
+            <enum state="8" iec="iec11.enum8"/>
+            <enum state="9" iec="iec11.enum9"/>
+        </location>
+        <location address="15" convert="1" type="4" unit="" multiple="1" show="1" iec="iec15" fnc_lab="1" >
+            <!--enum, state：根据地址读取的数据，iec：读取的数值对应的iec标识-->
+            <enum state="0" iec="iec15.enum0"/>
+            <enum state="1" iec="iec15.enum1"/>
+            <enum state="2" iec="iec15.enum2"/>
+            <enum state="3" iec="iec15.enum3"/>
+            <enum state="4" iec="iec15.enum4"/>
+            <enum state="5" iec="iec15.enum5"/>
+            <enum state="6" iec="iec15.enum6"/>
+            <enum state="7" iec="iec15.enum7"/>
+            <enum state="8" iec="iec15.enum8"/>
+            <enum state="9" iec="iec15.enum9"/>
+        </location>
+        <location address="16" convert="1" type="1" unit="" multiple="1" show="1" iec="iec16" fnc_lab="1"/>
+        <location address="17" convert="1" type="4" unit="" multiple="1" show="1" iec="iec17" fnc_lab="1">
+            <enum state="0" iec="iec17.enum0"/>
+            <enum state="1" iec="iec17.enum1"/>
+            <enum state="2" iec="iec17.enum2"/>
+            <enum state="3" iec="iec17.enum3"/>
+            <enum state="4" iec="iec17.enum4"/>
+            <enum state="5" iec="iec17.enum5"/>
+        </location>
+        <location address="18" convert="1" type="4" unit="" multiple="1" show="1" iec="iec18" fnc_lab="1">
+            <enum state="0" iec="iec18.enum0"/>
+            <enum state="10" iec="iec18.enum10"/>
+            <enum state="20" iec="iec18.enum20"/>
+        </location>
+        <location address="19" convert="1" type="4" unit="" multiple="1" show="1" iec="iec19" fnc_lab="1">
+            <enum state="0" iec="iec19.enum0"/>
+            <enum state="10" iec="iec19.enum10"/>
+            <enum state="20" iec="iec19.enum20"/>
+        </location>
+        <location address="22" convert="1" type="4" unit="" multiple="1" show="1" iec="iec22" fnc_lab="1">
+            <enum state="1" iec="iec22.enum1"/>
+            <enum state="2" iec="iec22.enum2"/>
+            <enum state="3" iec="iec22.enum3"/>
+            <enum state="4" iec="iec22.enum4"/>
+            <enum state="5" iec="iec22.enum5"/>
+            <enum state="6" iec="iec22.enum6"/>
+            <enum state="7" iec="iec22.enum7"/>
+            <enum state="8" iec="iec22.enum8"/>
+        </location>
+        <location address="23" convert="1" type="4" unit="" multiple="1" show="1" iec="iec23" fnc_lab="1" >
+            <enum state="0" iec="iec23.enum0"/>
+            <enum state="1" iec="iec23.enum1"/>
+            <enum state="2" iec="iec23.enum2"/>
+            <enum state="3" iec="iec23.enum3"/>
+            <enum state="4" iec="iec23.enum4"/>
+            <enum state="5" iec="iec23.enum5"/>
+            <enum state="6" iec="iec23.enum6"/>
+            <enum state="7" iec="iec23.enum7"/>
+            <enum state="8" iec="iec23.enum8"/>
+            <enum state="9" iec="iec23.enum9"/>
+            <enum state="10" iec="iec23.enum10"/>
+            <enum state="11" iec="iec23.enum11"/>
+            <enum state="12" iec="iec23.enum12"/>
+            <enum state="13" iec="iec23.enum13"/>
+        </location>
+        <location address="23" convert="1" type="4" unit="" multiple="1" show="23" iec="iec23" fnc_lab="1" >
+            <enum state="0" iec="iec23.enum0"/>
+            <enum state="1" iec="iec23.enum1"/>
+            <enum state="2" iec="iec23.enum2"/>
+            <enum state="3" iec="iec23.enum3"/>
+            <enum state="4" iec="iec23.enum4"/>
+            <enum state="5" iec="iec23.enum5"/>
+            <enum state="6" iec="iec23.enum6"/>
+            <enum state="7" iec="iec23.enum7"/>
+            <enum state="8" iec="iec23.enum8"/>
+            <enum state="9" iec="iec23.enum9"/>
+            <enum state="10" iec="iec23.enum10"/>
+            <enum state="11" iec="iec23.enum11"/>
+            <enum state="12" iec="iec23.enum12"/>
+            <enum state="13" iec="iec23.enum13"/>
+        </location>
+        <location address="24" convert="1" type="4" unit="" multiple="1" show="1" iec="iec24" fnc_lab="1" >
+            <enum state="0" iec="iec24.enum0"/>
+            <enum state="1" iec="iec24.enum1"/>
+            <enum state="2" iec="iec24.enum2"/>
+            <enum state="3" iec="iec24.enum3"/>
+            <enum state="4" iec="iec24.enum4"/>
+            <enum state="5" iec="iec24.enum5"/>
+            <enum state="6" iec="iec24.enum6"/>
+        </location>
+        <location address="25" convert="1" type="4" unit="" multiple="1" show="1" iec="iec25" fnc_lab="1" >
+            <enum state="0" iec="iec25.enum0"/>
+            <enum state="1" iec="iec25.enum1"/>
+            <enum state="2" iec="iec25.enum2"/>
+            <enum state="3" iec="iec25.enum3"/>
+            <enum state="4" iec="iec25.enum4"/>
+            <enum state="5" iec="iec25.enum5"/>
+            <enum state="6" iec="iec25.enum6"/>
+        </location>
+        <location address="26" convert="1" type="4" unit="" multiple="1" show="1" iec="iec26" fnc_lab="1" >
+            <enum state="0" iec="iec26.enum0"/>
+            <enum state="1" iec="iec26.enum1"/>
+            <enum state="2" iec="iec26.enum2"/>
+            <enum state="3" iec="iec26.enum3"/>
+            <enum state="4" iec="iec26.enum4"/>
+            <enum state="5" iec="iec26.enum5"/>
+            <enum state="6" iec="iec26.enum6"/>
+        </location>
+        <location address="27" convert="1" type="4" unit="" multiple="1" show="1" iec="iec27" fnc_lab="1" >
+            <enum state="1" iec="iec27.enum1"/>
+            <enum state="2" iec="iec27.enum2"/>
+            <enum state="3" iec="iec27.enum3"/>
+            <enum state="4" iec="iec27.enum4"/>
+            <enum state="5" iec="iec27.enum5"/>
+            <enum state="6" iec="iec27.enum6"/>
+            <enum state="7" iec="iec27.enum7"/>
+            <enum state="8" iec="iec27.enum8"/>
+            <enum state="9" iec="iec27.enum9"/>
+            <enum state="10" iec="iec27.enum10"/>
+        </location>
+        <location address="28" convert="1" type="1" unit="" multiple="1" show="4" iec="iec28" fnc_lab="1"/>
+        <location address="29" convert="1" type="4" unit="" multiple="1" show="1" iec="iec29" fnc_lab="1" >
+            <enum state="1" iec="iec29.enum1"/>
+            <enum state="2" iec="iec29.enum2"/>
+        </location>
+        <location address="30" convert="1" type="4" unit="" multiple="1" show="1" iec="iec30" fnc_lab="1" >
+            <enum state="1" iec="iec30.enum1"/>
+            <enum state="2" iec="iec30.enum2"/>
+            <enum state="3" iec="iec30.enum3"/>
+            <enum state="4" iec="iec30.enum4"/>
+            <enum state="5" iec="iec30.enum5"/>
+            <enum state="6" iec="iec30.enum6"/>
+            <enum state="7" iec="iec30.enum7"/>
+            <enum state="8" iec="iec30.enum8"/>
+            <enum state="9" iec="iec30.enum9"/>
+            <enum state="10" iec="iec30.enum10"/>
+        </location>
+        <location address="31" convert="1" type="4" unit="" multiple="1" show="1" iec="iec31" fnc_lab="1" >
+            <enum state="0" iec="iec31.enum0"/>
+            <enum state="1" iec="iec31.enum1"/>
+            <enum state="2" iec="iec31.enum2"/>
+        </location>
+        <location address="34" convert="1" type="4" unit="" multiple="1" show="1" iec="iec34" fnc_lab="1" >
+            <enum state="0" iec="iec34.enum0"/>
+            <enum state="1" iec="iec34.enum1"/>
+            <enum state="2" iec="iec34.enum2"/>
+        </location>
+        //故障
+        <!--机组当前故障码，直接显示，现场实施后提供解析-->
+        <location address="40" convert="1" type="1" unit="" multiple="1" show="16" iec="iec40" fnc_lab="1"/>
+<!--        <location address="41" convert="1" type="1" unit="" multiple="1" show="16" iec="iec41" fnc_lab="1"/>-->
+        <location address="42" convert="1" type="1" unit="" multiple="1" show="16" iec="iec42" fnc_lab="1"/>
+        <location address="43" convert="1" type="1" unit="" multiple="1" show="16" iec="iec43" fnc_lab="1"/>
+        <location address="44" convert="1" type="1" unit="" multiple="1" show="16" iec="iec44" fnc_lab="1"/>
+        <location address="45" convert="1" type="1" unit="" multiple="1" show="16" iec="iec45" fnc_lab="1"/>
+        <location address="46" convert="1" type="1" unit="" multiple="1" show="16" iec="iec46" fnc_lab="1"/>
+        <location address="47" convert="1" type="1" unit="" multiple="1" show="16" iec="iec47" fnc_lab="1"/>
+        <location address="48" convert="1" type="1" unit="" multiple="1" show="16" iec="iec48" fnc_lab="1"/>
+        <location address="49" convert="1" type="1" unit="" multiple="1" show="16" iec="iec49" fnc_lab="1"/>
+<!--        <location address="50" convert="1" type="1" unit="" multiple="1" show="16" iec="iec50" fnc_lab="1"/>-->
+<!--        <location address="51" convert="1" type="1" unit="" multiple="1" show="16" iec="iec51" fnc_lab="1"/>-->
+        <!--变流器当前告警码，直接显示，现场实施后提供解析-->
+        <location address="52" convert="1" type="1" unit="" multiple="1" show="16" iec="iec52" fnc_lab="1"/>
+<!--        <location address="53" convert="1" type="1" unit="" multiple="1" show="16" iec="iec53" fnc_lab="1"/>-->
+<!--        <location address="54" convert="1" type="1" unit="" multiple="1" show="16" iec="iec54" fnc_lab="1"/>-->
+        <!--变桨1当前告警码，直接显示，现场实施后提供解析-->
+        <location address="55" convert="1" type="1" unit="" multiple="1" show="16" iec="iec55" fnc_lab="1"/>
+<!--        <location address="56" convert="1" type="1" unit="" multiple="1" show="16" iec="iec56" fnc_lab="1"/>-->
+<!--        <location address="57" convert="1" type="1" unit="" multiple="1" show="16" iec="iec57" fnc_lab="1"/>-->
+        <!--变桨2当前告警码，直接显示，现场实施后提供解析-->
+        <location address="58" convert="1" type="1" unit="" multiple="1" show="16" iec="iec58" fnc_lab="1"/>
+<!--        <location address="59" convert="1" type="1" unit="" multiple="1" show="16" iec="iec59" fnc_lab="1"/>-->
+<!--        <location address="60" convert="1" type="1" unit="" multiple="1" show="16" iec="iec60" fnc_lab="1"/>-->
+        <!--变桨3当前告警码，直接显示，现场实施后提供解析-->
+        <location address="61" convert="1" type="1" unit="" multiple="1" show="16" iec="iec61" fnc_lab="1"/>
+<!--        <location address="62" convert="1" type="1" unit="" multiple="1" show="16" iec="iec62" fnc_lab="1"/>-->
+<!--        <location address="63" convert="1" type="1" unit="" multiple="1" show="16" iec="iec63" fnc_lab="1"/>-->
+        <!--机组当前告警个数，为0则无告警-->
+        <!--机组当前警告码，直接显示，现场实施后提供解析-->
+        <location address="64" convert="1" type="1" unit="" multiple="1" show="16" iec="iec64" fnc_lab="1"/>
+        <location address="65" convert="1" type="1" unit="" multiple="1" show="16" iec="iec65" fnc_lab="1"/>
+        <location address="66" convert="1" type="1" unit="" multiple="1" show="16" iec="iec66" fnc_lab="1"/>
+        <location address="67" convert="1" type="1" unit="" multiple="1" show="16" iec="iec67" fnc_lab="1"/>
+        <location address="68" convert="1" type="1" unit="" multiple="1" show="16" iec="iec68" fnc_lab="1"/>
+        <location address="69" convert="1" type="1" unit="" multiple="1" show="16" iec="iec69" fnc_lab="1"/>
+        <location address="70" convert="1" type="1" unit="" multiple="1" show="16" iec="iec70" fnc_lab="1"/>
+        <location address="71" convert="1" type="1" unit="" multiple="1" show="16" iec="iec71" fnc_lab="1"/>
+        <location address="72" convert="1" type="1" unit="" multiple="1" show="16" iec="iec72" fnc_lab="1"/>
+<!--        <location address="73" convert="1" type="1" unit="" multiple="1" show="16" iec="iec73" fnc_lab="1"/>-->
+<!--        <location address="74" convert="1" type="1" unit="" multiple="1" show="16" iec="iec74" fnc_lab="1"/>-->
+
+        <location address="55" convert="1" type="4" unit="" multiple="1" show="4" iec="iec55" fnc_lab="1"/>
+        <location address="58" convert="1" type="4" unit="" multiple="1" show="4" iec="iec58" fnc_lab="1"/>
+        <location address="61" convert="1" type="4" unit="" multiple="1" show="4" iec="iec61" fnc_lab="1"/>
+        <location address="75" convert="1" type="4" unit="" multiple="1" show="1" iec="iec75" fnc_lab="1"/>
+        //信息
+        <location address="76" convert="1" type="4" unit="" multiple="1" show="3" iec="iec76" fnc_lab="1"/>
+        <location address="77" convert="1" type="4" unit="" multiple="1" show="3" iec="iec77" fnc_lab="1"/>
+        <location address="78" convert="1" type="4" unit="" multiple="1" show="3" iec="iec78" fnc_lab="1"/>
+        <location address="79" convert="1" type="4" unit="" multiple="1" show="3" iec="iec79" fnc_lab="1"/>
+        <location address="80" convert="1" type="4" unit="" multiple="1" show="3" iec="iec80" fnc_lab="1"/>
+        <location address="81" convert="1" type="4" unit="" multiple="1" show="3" iec="iec81" fnc_lab="1"/>
+        <location address="82" convert="1" type="4" unit="" multiple="1" show="3" iec="iec82" fnc_lab="1"/>
+        <location address="83" convert="1" type="4" unit="" multiple="1" show="3" iec="iec83" fnc_lab="1"/>
+        <location address="84" convert="1" type="4" unit="" multiple="1" show="3" iec="iec84" fnc_lab="1"/>
+        <location address="85" convert="1" type="4" unit="" multiple="1" show="3" iec="iec85" fnc_lab="1"/>
+        <location address="86" convert="1" type="4" unit="" multiple="1" show="3" iec="iec86" fnc_lab="1"/>
+        <location address="87" convert="1" type="4" unit="" multiple="1" show="3" iec="iec87" fnc_lab="1"/>
+    </group>
+
+    <group index="2" start="100" end="198">
+        <location address="121" convert="1" type="1" unit="kw" multiple="1" show="1" iec="iec121" fnc_lab="1"/>
+        <location address="100" convert="1" type="2" unit="m/s" multiple="100" show="1" iec="iec100" fnc_lab="1"/>
+        <location address="100" convert="1" type="2" unit="m/s" multiple="100" show="2" iec="iec40100" fnc_lab="2"/>
+        <location address="101" convert="1" type="2" unit="m/s" multiple="100" show="2" iec="iec40101" fnc_lab="2"/>
+        <location address="132" convert="2" type="1" unit="°" multiple="100" show="1" iec="iec132" fnc_lab="1"/>
+        <location address="103" convert="1" type="1" unit="°" multiple="100" show="1" iec="iec103" fnc_lab="1"/>
+        <location address="107" convert="2" type="2" unit="rpm" multiple="100" show="1" iec="iec107" fnc_lab="1"/>
+        //测风系统1
+        <location address="100" convert="1" type="1" unit="m/s" multiple="100" show="7" iec="iec100" fnc_lab="1"/>
+        <location address="101" convert="1" type="2" unit="m/s" multiple="100" show="7" iec="iec101" fnc_lab="1"/>
+        <location address="102" convert="1" type="2" unit="m/s" multiple="100" show="7" iec="iec102" fnc_lab="1"/>
+        <location address="103" convert="1" type="2" unit="°" multiple="100" show="7" iec="iec103" fnc_lab="1"/>
+        <location address="104" convert="2" type="1" unit="°" multiple="100" show="7" iec="iec104" fnc_lab="1"/>
+        <location address="104" convert="2" type="1" unit="°" multiple="100" show="23" iec="iec104" fnc_lab="1"/>
+        <location address="105" convert="1" type="1" unit="°" multiple="100" show="7" iec="iec105" fnc_lab="1"/>
+        //叶轮1
+<!--        <location address="106" convert="2" type="2" unit="rpm" multiple="100" show="11" iec="iec106" fnc_lab="1"/>-->
+        <location address="107" convert="2" type="2" unit="rpm" multiple="100" show="11" iec="iec107" fnc_lab="1"/>
+        <location address="108" convert="2" type="2" unit="rpm" multiple="100" show="11" iec="iec108" fnc_lab="1"/>
+        <location address="109" convert="2" type="2" unit="rpm" multiple="100" show="11" iec="iec109" fnc_lab="1"/>
+        <location address="110" convert="2" type="2" unit="rpm" multiple="100" show="11" iec="iec110" fnc_lab="1"/>
+<!--        <location address="111" convert="1" type="2" unit="rpm" multiple="100" show="11" iec="iec111" fnc_lab="1"/>-->
+<!--        <location address="112" convert="1" type="2" unit="g" multiple="" show="11" iec="iec112" fnc_lab="1"/>-->
+        //振动系统
+        <location address="113" convert="2" type="2" unit="g" multiple="10000" show="6" iec="iec113" fnc_lab="1"/>
+        <location address="114" convert="2" type="2" unit="g" multiple="10000" show="6" iec="iec114" fnc_lab="1"/>
+        <location address="113" convert="2" type="2" unit="g" multiple="10000" show="19" iec="iec113" fnc_lab="1"/>
+        <location address="114" convert="2" type="2" unit="g" multiple="10000" show="19" iec="iec114" fnc_lab="1"/>
+        <location address="115" convert="2" type="2" unit="g" multiple="10000" show="6" iec="iec115" fnc_lab="1"/>
+        <location address="116" convert="2" type="2" unit="g" multiple="10000" show="6" iec="iec116" fnc_lab="1"/>
+        <location address="117" convert="1" type="2" unit="mm/s" multiple="1" show="6" iec="iec117" fnc_lab="1"/>
+        <location address="118" convert="1" type="2" unit="mm/s" multiple="1" show="6" iec="iec118" fnc_lab="1"/>
+        //电网
+        <location address="119" convert="1" type="1" unit="V" multiple="1" show="8" iec="iec119" fnc_lab="1"/>
+        <location address="120" convert="1" type="1" unit="Hz" multiple="10" show="8" iec="iec120" fnc_lab="1"/>
+        <location address="121" convert="2" type="1" unit="kw" multiple="1" show="8" iec="iec121" fnc_lab="1"/>
+        <location address="122" convert="2" type="1" unit="kvar" multiple="1" show="8" iec="iec122" fnc_lab="1"/>
+        <location address="123" convert="2" type="1" unit="kw" multiple="1" show="8" iec="iec123" fnc_lab="1"/>
+        <location address="124" convert="2" type="1" unit="kvar" multiple="1" show="8" iec="iec124" fnc_lab="1"/>
+        <location address="125" convert="1" type="1" unit="V" multiple="1" show="8" iec="iec125" fnc_lab="1"/>
+        <location address="126" convert="1" type="1" unit="V" multiple="1" show="8" iec="iec126" fnc_lab="1"/>
+        <location address="127" convert="1" type="1" unit="V" multiple="1" show="8" iec="iec127" fnc_lab="1"/>
+        <location address="128" convert="1" type="1" unit="A" multiple="1" show="8" iec="iec128" fnc_lab="1"/>
+        <location address="129" convert="1" type="1" unit="A" multiple="1" show="8" iec="iec129" fnc_lab="1"/>
+        <location address="130" convert="1" type="1" unit="A" multiple="1" show="8" iec="iec130" fnc_lab="1"/>
+        <location address="131" convert="1" type="2" unit="" multiple="100" show="8" iec="iec131" fnc_lab="1"/>
+        //变桨
+        <location address="132" convert="2" type="2" unit="°" multiple="100" show="4" iec="iec132" fnc_lab="1"/>
+        <location address="133" convert="2" type="2" unit="°" multiple="100" show="4" iec="iec133" fnc_lab="1"/>
+        <location address="134" convert="2" type="2" unit="°" multiple="100" show="4" iec="iec134" fnc_lab="1"/>
+        <location address="132" convert="2" type="2" unit="°" multiple="100" show="20" iec="iec132" fnc_lab="1"/>
+        <location address="133" convert="2" type="2" unit="°" multiple="100" show="20" iec="iec133" fnc_lab="1"/>
+        <location address="134" convert="2" type="2" unit="°" multiple="100" show="20" iec="iec134" fnc_lab="1"/>
+        <location address="135" convert="2" type="2" unit="°/s" multiple="100" show="4" iec="iec135" fnc_lab="1"/>
+        <location address="136" convert="2" type="2" unit="°/s" multiple="100" show="4" iec="iec136" fnc_lab="1"/>
+        <location address="137" convert="2" type="2" unit="°/s" multiple="100" show="4" iec="iec137" fnc_lab="1"/>
+        <location address="138" convert="2" type="2" unit="°/s" multiple="100" show="4" iec="iec138" fnc_lab="1"/>
+        <location address="139" convert="2" type="2" unit="°/s" multiple="100" show="4" iec="iec139" fnc_lab="1"/>
+        <location address="140" convert="2" type="2" unit="°/s" multiple="100" show="4" iec="iec140" fnc_lab="1"/>
+        <location address="141" convert="2" type="1" unit="°C" multiple="1" show="4" iec="iec141" fnc_lab="1"/>
+        <location address="142" convert="2" type="1" unit="°C" multiple="1" show="4" iec="iec142" fnc_lab="1"/>
+        <location address="143" convert="2" type="1" unit="°C" multiple="1" show="4" iec="iec143" fnc_lab="1"/>
+        <location address="144" convert="1" type="1" unit="Nm" multiple="1" show="4" iec="iec144" fnc_lab="1"/>
+        <location address="145" convert="1" type="1" unit="Nm" multiple="1" show="4" iec="iec145" fnc_lab="1"/>
+        <location address="146" convert="1" type="1" unit="Nm" multiple="1" show="4" iec="iec146" fnc_lab="1"/>
+        <location address="147" convert="2" type="1" unit="°C" multiple="1" show="4" iec="iec147" fnc_lab="1"/>
+        <location address="148" convert="2" type="1" unit="°C" multiple="1" show="4" iec="iec148" fnc_lab="1"/>
+        <location address="149" convert="2" type="1" unit="°C" multiple="1" show="4" iec="iec149" fnc_lab="1"/>
+        <location address="150" convert="1" type="2" unit="A" multiple="100" show="4" iec="iec150" fnc_lab="1"/>
+        <location address="151" convert="1" type="2" unit="A" multiple="100" show="4" iec="iec151" fnc_lab="1"/>
+        <location address="152" convert="1" type="2" unit="A" multiple="100" show="4" iec="iec152" fnc_lab="1"/>
+        <location address="153" convert="1" type="2" unit="V" multiple="10" show="4" iec="iec153" fnc_lab="1"/>
+        <location address="153" convert="1" type="2" unit="V" multiple="10" show="20" iec="iec153" fnc_lab="1"/>
+        <location address="154" convert="1" type="2" unit="V" multiple="10" show="4" iec="iec154" fnc_lab="1"/>
+        <location address="155" convert="1" type="2" unit="V" multiple="10" show="4" iec="iec155" fnc_lab="1"/>
+        <location address="156" convert="1" type="2" unit="V" multiple="10" show="4" iec="iec156" fnc_lab="1"/>
+        <location address="157" convert="1" type="2" unit="V" multiple="10" show="4" iec="iec157" fnc_lab="1"/>
+        <location address="158" convert="1" type="2" unit="V" multiple="10" show="4" iec="iec158" fnc_lab="1"/>
+        <location address="159" convert="2" type="1" unit="°C" multiple="1" show="4" iec="iec159" fnc_lab="1"/>
+        <location address="160" convert="2" type="1" unit="°C" multiple="1" show="4" iec="iec160" fnc_lab="1"/>
+        <location address="161" convert="2" type="1" unit="°C" multiple="1" show="4" iec="iec161" fnc_lab="1"/>
+        <location address="162" convert="2" type="1" unit="°C" multiple="1" show="4" iec="iec162" fnc_lab="1"/>
+        <location address="163" convert="2" type="1" unit="°C" multiple="1" show="4" iec="iec163" fnc_lab="1"/>
+        <location address="164" convert="2" type="1" unit="°C" multiple="1" show="4" iec="iec164" fnc_lab="1"/>
+        <location address="165" convert="2" type="2" unit="°C" multiple="10" show="4" iec="iec165" fnc_lab="1"/>
+        <location address="166" convert="2" type="2" unit="°C" multiple="10" show="4" iec="iec166" fnc_lab="1"/>
+        <location address="167" convert="2" type="2" unit="°C" multiple="10" show="4" iec="iec167" fnc_lab="1"/>
+        <location address="168" convert="2" type="2" unit="°C" multiple="10" show="4" iec="iec168" fnc_lab="1"/>
+        <location address="169" convert="2" type="2" unit="°C" multiple="10" show="4" iec="iec169" fnc_lab="1"/>
+        <location address="170" convert="2" type="2" unit="°C" multiple="10" show="4" iec="iec170" fnc_lab="1"/>
+        <location address="171" convert="2" type="2" unit="°C" multiple="10" show="4" iec="iec171" fnc_lab="1"/>
+        <location address="172" convert="2" type="2" unit="°C" multiple="10" show="4" iec="iec172" fnc_lab="1"/>
+        <location address="173" convert="2" type="2" unit="°C" multiple="10" show="4" iec="iec173" fnc_lab="1"/>
+        <location address="174" convert="1" type="2" unit="F" multiple="100" show="4" iec="iec174" fnc_lab="1"/>
+        <location address="174" convert="1" type="2" unit="F" multiple="100" show="20" iec="iec174" fnc_lab="1"/>
+        <location address="175" convert="1" type="2" unit="F" multiple="100" show="4" iec="iec175" fnc_lab="1"/>
+        <location address="176" convert="1" type="2" unit="F" multiple="100" show="4" iec="iec176" fnc_lab="1"/>
+        <location address="177" convert="2" type="2" unit="°" multiple="100" show="4" iec="iec177" fnc_lab="1"/>
+        <location address="178" convert="2" type="2" unit="/" multiple="100" show="4" iec="iec178" fnc_lab="1"/>
+        <location address="178" convert="2" type="2" unit="/" multiple="100" show="20" iec="iec178" fnc_lab="1"/>
+        <location address="179" convert="2" type="2" unit="/" multiple="100" show="4" iec="iec179" fnc_lab="1"/>
+        <location address="180" convert="2" type="2" unit="/" multiple="100" show="4" iec="iec180" fnc_lab="1"/>
+        <location address="181" convert="2" type="1" unit="/" multiple="1" show="4" iec="iec181" fnc_lab="1"/>
+        <location address="182" convert="2" type="1" unit="/" multiple="1" show="4" iec="iec182" fnc_lab="1"/>
+        <location address="183" convert="2" type="1" unit="/" multiple="1" show="4" iec="iec183" fnc_lab="1"/>
+        //变流器1
+        <location address="184" convert="2" type="1" unit="°C" multiple="1" show="5" iec="iec184" fnc_lab="1"/>
+        <location address="185" convert="2" type="1" unit="°C" multiple="1" show="5" iec="iec185" fnc_lab="1"/>
+        <location address="186" convert="1" type="2" unit="V" multiple="10" show="5" iec="iec186" fnc_lab="1"/>
+        <location address="187" convert="1" type="2" unit="V" multiple="10" show="5" iec="iec187" fnc_lab="1"/>
+        <location address="188" convert="2" type="1" unit="°C" multiple="1" show="5" iec="iec188" fnc_lab="1"/>
+        <location address="189" convert="1" type="1" unit="/" multiple="1" show="5" iec="iec189" fnc_lab="1"/>
+        <location address="190" convert="1" type="1" unit="Nm" multiple="1" show="5" iec="iec190" fnc_lab="1"/>
+        <location address="191" convert="1" type="1" unit="Nm" multiple="1" show="5" iec="iec191" fnc_lab="1"/>
+<!--        <location address="192" convert="2" type="1" unit="/" multiple="1" show="5" iec="iec192" fnc_lab="1"/>-->
+<!--        <location address="193" convert="2" type="1" unit="/" multiple="1" show="5" iec="iec193" fnc_lab="1"/>-->
+        <location address="194" convert="1" type="1" unit="A" multiple="10" show="5" iec="iec194" fnc_lab="1"/>
+        <location address="195" convert="1" type="1" unit="V" multiple="1" show="5" iec="iec195" fnc_lab="1"/>
+        <location address="196" convert="1" type="1" unit="V" multiple="1" show="5" iec="iec196" fnc_lab="1"/>
+        <location address="197" convert="1" type="1" unit="V" multiple="1" show="5" iec="iec197" fnc_lab="1"/>
+        <location address="198" convert="1" type="2" unit="Hz" multiple="10" show="5" iec="iec198" fnc_lab="1"/>
+    </group>
+
+    <group index="3" start="200" end="269">
+        //偏航
+        <location address="200" convert="2" type="2" unit="°" multiple="10" show="9" iec="iec200" fnc_lab="1"/>
+        <location address="200" convert="2" type="2" unit="°" multiple="10" show="23" iec="iec200" fnc_lab="1"/>
+<!--        <location address="201" convert="1" type="2" unit="°" multiple="10" show="9" iec="iec201" fnc_lab="1"/>-->
+        <location address="202" convert="2" type="2" unit="°/S" multiple="100" show="9" iec="iec202" fnc_lab="1"/>
+        <location address="202" convert="2" type="2" unit="°/S" multiple="100" show="23" iec="iec202" fnc_lab="1"/>
+        <location address="203" convert="1" type="2" unit="°" multiple="10" show="9" iec="iec203" fnc_lab="1"/>
+        <location address="204" convert="1" type="2" unit="bar" multiple="10" show="9" iec="iec204" fnc_lab="1"/>
+        <location address="205" convert="1" type="2" unit="%" multiple="10" show="9" iec="iec205" fnc_lab="1"/>
+        <location address="206" convert="1" type="2" unit="°C" multiple="10" show="9" iec="iec206" fnc_lab="1"/>
+        <location address="207" convert="1" type="2" unit="°C" multiple="10" show="9" iec="iec207" fnc_lab="1"/>
+        <location address="208" convert="1" type="2" unit="°" multiple="10" show="18" iec="iec208" fnc_lab="1"/>
+        //发电机
+        <location address="215" convert="2" type="2" unit="A" multiple="10" show="10" iec="iec215" fnc_lab="1"/>
+        <location address="216" convert="2" type="1" unit="A" multiple="1" show="10" iec="iec216" fnc_lab="1"/>
+        <location address="217" convert="2" type="1" unit="°C" multiple="1" show="10" iec="iec217" fnc_lab="1"/>
+        <location address="218" convert="2" type="1" unit="°C" multiple="1" show="10" iec="iec218" fnc_lab="1"/>
+        <location address="219" convert="2" type="1" unit="°C" multiple="1" show="10" iec="iec219" fnc_lab="1"/>
+        <location address="220" convert="2" type="1" unit="°C" multiple="1" show="10" iec="iec220" fnc_lab="1"/>
+        <location address="221" convert="2" type="1" unit="°C" multiple="1" show="10" iec="iec221" fnc_lab="1"/>
+        <location address="222" convert="2" type="1" unit="°C" multiple="1" show="10" iec="iec222" fnc_lab="1"/>
+        <location address="223" convert="2" type="1" unit="°C" multiple="1" show="10" iec="iec223" fnc_lab="1"/>
+        <location address="224" convert="2" type="1" unit="°C" multiple="1" show="10" iec="iec224" fnc_lab="1"/>
+        <location address="225" convert="2" type="1" unit="°C" multiple="1" show="10" iec="iec225" fnc_lab="1"/>
+        <location address="226" convert="2" type="1" unit="°C" multiple="1" show="10" iec="iec226" fnc_lab="1"/>
+        <location address="227" convert="2" type="1" unit="°C" multiple="1" show="10" iec="iec227" fnc_lab="1"/>
+        <location address="228" convert="2" type="1" unit="°C" multiple="1" show="10" iec="iec228" fnc_lab="1"/>
+        //水冷
+        <location address="229" convert="2" type="1" unit="°C" multiple="1" show="14" iec="iec229" fnc_lab="1"/>
+        <location address="230" convert="2" type="1" unit="°C" multiple="1" show="14" iec="iec230" fnc_lab="1"/>
+        <location address="231" convert="1" type="2" unit="bar" multiple="10" show="14" iec="iec231" fnc_lab="1"/>
+        <location address="232" convert="1" type="2" unit="bar" multiple="10" show="14" iec="iec232" fnc_lab="1"/>
+        <location address="229" convert="2" type="1" unit="°C" multiple="1" show="18" iec="iec229" fnc_lab="1"/>
+        <location address="230" convert="2" type="1" unit="°C" multiple="1" show="18" iec="iec230" fnc_lab="1"/>
+        <location address="231" convert="1" type="2" unit="bar" multiple="10" show="18" iec="iec231" fnc_lab="1"/>
+        <location address="232" convert="1" type="2" unit="bar" multiple="10" show="18" iec="iec232" fnc_lab="1"/>
+        //液压站
+        <location address="233" convert="1" type="2" unit="bar" multiple="10" show="12" iec="iec233" fnc_lab="1"/>
+        <location address="233" convert="1" type="2" unit="bar" multiple="10" show="19" iec="iec233" fnc_lab="1"/>
+        //机舱
+        <location address="234" convert="2" type="1" unit="°C" multiple="1" show="13" iec="iec234" fnc_lab="1"/>
+        <location address="235" convert="2" type="1" unit="Kw" multiple="1" show="13" iec="iec235" fnc_lab="1"/>
+        <location address="236" convert="2" type="1" unit="°C" multiple="1" show="13" iec="iec236" fnc_lab="1"/>
+        //时钟
+        <location address="244" convert="1" type="1" unit="" multiple="1" show="1" iec="iec244" fnc_lab="1"/>
+        <location address="245" convert="1" type="1" unit="" multiple="1" show="1" iec="iec245" fnc_lab="1"/>
+        <location address="246" convert="1" type="1" unit="" multiple="1" show="1" iec="iec246" fnc_lab="1"/>
+        <location address="247" convert="1" type="1" unit="" multiple="1" show="1" iec="iec247" fnc_lab="1"/>
+        <location address="248" convert="1" type="1" unit="" multiple="1" show="1" iec="iec248" fnc_lab="1"/>
+        <location address="249" convert="1" type="1" unit="" multiple="1" show="1" iec="iec249" fnc_lab="1"/>
+        //测风系统2
+        <location address="250" convert="1" type="4" unit="" multiple="1" show="7" iec="iec250" fnc_lab="1">
+            <enum state="10" iec="iec250.enum10"/>
+            <enum state="20" iec="iec250.enum20"/>
+            <enum state="30" iec="iec250.enum30"/>
+        </location>
+        <location address="251" convert="1" type="4" unit="" multiple="1" show="7" iec="iec251" fnc_lab="1">
+            <enum state="10" iec="iec251.enum10"/>
+            <enum state="20" iec="iec251.enum20"/>
+            <enum state="30" iec="iec251.enum30"/>
+            <enum state="40" iec="iec251.enum40"/>
+        </location>
+        <location address="252" convert="1" type="1" unit="m/s" multiple="1" show="7" iec="iec252" fnc_lab="1"/>
+        <location address="253" convert="1" type="1" unit="m/s" multiple="1" show="7" iec="iec253" fnc_lab="1"/>
+        <location address="254" convert="1" type="1" unit="°" multiple="1" show="7" iec="iec254" fnc_lab="1"/>
+        <location address="255" convert="1" type="1" unit="°" multiple="1" show="7" iec="iec255" fnc_lab="1"/>
+        //变流器2
+        <location address="256" convert="2" type="2" unit="A" multiple="10" show="5" iec="iec256" fnc_lab="1"/>
+        <location address="257" convert="2" type="2" unit="A" multiple="10" show="5" iec="iec257" fnc_lab="1"/>
+        <location address="258" convert="2" type="2" unit="A" multiple="10" show="5" iec="iec258" fnc_lab="1"/>
+        //电网2
+        <location address="259" convert="1" type="1" unit="" multiple="1" show="8" iec="iec259" fnc_lab="1"/>
+        //叶轮2
+        <location address="260" convert="2" type="2" unit="rpm" multiple="100" show="11" iec="iec260" fnc_lab="1"/>
+        <location address="261" convert="2" type="2" unit="rpm" multiple="100" show="11" iec="iec261" fnc_lab="1"/>
+        <location address="262" convert="2" type="2" unit="rpm" multiple="100" show="11" iec="iec262" fnc_lab="1"/>
+        <location address="263" convert="2" type="2" unit="rpm" multiple="100" show="11" iec="iec263" fnc_lab="1"/>
+        <location address="264" convert="2" type="2" unit="rpm" multiple="100" show="11" iec="iec264" fnc_lab="1"/>
+        <location address="265" convert="2" type="2" unit="rpm" multiple="100" show="11" iec="iec265" fnc_lab="1"/>
+        <location address="265" convert="2" type="2" unit="rpm" multiple="100" show="19" iec="iec265" fnc_lab="1"/>
+        <location address="266" convert="2" type="2" unit="rpm" multiple="100" show="11" iec="iec266" fnc_lab="1"/>
+        //塔基
+        <location address="267" convert="2" type="1" unit="°C" multiple="1" show="15" iec="iec267" fnc_lab="1"/>
+    </group>
+    <group index="4" start="300" end="398">
+        //时间统计
+        <location address="304" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec304" fnc_lab="1"/>
+        <location address="306" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec306" fnc_lab="1"/>
+        <location address="308" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec308" fnc_lab="1"/>
+        <location address="310" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec310" fnc_lab="1"/>
+<!--        <location address="312" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec312" fnc_lab="1"/>-->
+        <location address="314" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec314" fnc_lab="1"/>
+        <location address="316" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec316" fnc_lab="1"/>
+        <location address="318" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec318" fnc_lab="1"/>
+        <location address="320" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec320" fnc_lab="1"/>
+        <location address="322" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec322" fnc_lab="1"/>
+        <location address="324" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec324" fnc_lab="1"/>
+        <location address="326" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec326" fnc_lab="1"/>
+        <location address="328" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec328" fnc_lab="1"/>
+        <location address="330" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec330" fnc_lab="1"/>
+        <location address="332" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec332" fnc_lab="1"/>
+        <location address="334" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec334" fnc_lab="1"/>
+        <location address="336" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec336" fnc_lab="1"/>
+        //可利用率统计
+        <location address="338" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec338" fnc_lab="1"/>
+        <location address="340" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec340" fnc_lab="1"/>
+        <location address="342" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec342" fnc_lab="1"/>
+<!--        <location address="344" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec344" fnc_lab="1"/>-->
+        <location address="346" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec346" fnc_lab="1"/>
+        <location address="348" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec348" fnc_lab="1"/>
+        <location address="350" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec350" fnc_lab="1"/>
+        <location address="352" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec352" fnc_lab="1"/>
+        <location address="354" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec354" fnc_lab="1"/>
+        <location address="356" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec356" fnc_lab="1"/>
+        <location address="358" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec358" fnc_lab="1"/>
+        <location address="360" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec360" fnc_lab="1"/>
+        <location address="362" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec362" fnc_lab="1"/>
+        <location address="364" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec364" fnc_lab="1"/>
+        <location address="366" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec366" fnc_lab="1"/>
+        <location address="368" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec368" fnc_lab="1"/>
+        <location address="370" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec370" fnc_lab="1"/>
+        <location address="372" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec372" fnc_lab="1"/>
+        <location address="374" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec374" fnc_lab="1"/>
+        <location address="376" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec376" fnc_lab="1"/>
+        <location address="378" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec378" fnc_lab="1"/>
+        <location address="380" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec380" fnc_lab="1"/>
+        <location address="382" convert="1" type="1" unit="min" multiple="1" show="17" iec="iec382" fnc_lab="1"/>
+    </group>
+        //------------zh添加   stop --------------//
+    //------------wyc添加   start --------------//
+    <group index="5" start="400" end="499">
+        <!--address, 采集地址-->
+        <!--convert, 类型转换，1: 0~65535 ushort（P_AB）; 2: -32767~32768（PM_AB）-->
+        <!--type, 1: int; 2: double; 3: bool(显示指示灯，true：绿，false：红); 4:枚举-->
+        <!--unit, 单位-->
+        <!--multiple, 采集数据根据type类型转换后，需缩小的倍数-->
+        <!--show, 根据序号展示在那个数据分栏中-->
+        <!--iec, 地址数据对应iec标识，用于国际化-->
+        <!--fnc_lab, 对应标签显示的类型，1：可视化文本（只读），2：脉冲按钮（可写），3：保持按钮，4：数据下发-->
+
+        <location address="100" convert="1" type="3" unit="" multiple="1" show="2" iec="iec400" fnc_lab="2"/>
+        <location address="101" convert="1" type="3" unit="" multiple="1" show="2" iec="iec401" fnc_lab="2"/>
+<!--        <location address="102" convert="1" type="3" unit="" multiple="1" show="23" iec="iec407" fnc_lab="2"/>-->
+<!--        <location address="103" convert="2" type="3" unit="" multiple="1" show="23" iec="iec408" fnc_lab="2"/>-->
+<!--        <location address="104" convert="1" type="3" unit="" multiple="1" show="21" iec="iec423" fnc_lab="4"/>-->
+<!--        <location address="105" convert="2" type="3" unit="" multiple="1" show="21" iec="iec424" fnc_lab="4"/>-->
+<!--        <location address="106" convert="1" type="3" unit="" multiple="1" show="21" iec="iec423" fnc_lab="4"/>-->
+        <location address="107" convert="1" type="3" unit="" multiple="1" show="23" iec="iec407" fnc_lab="2"/>
+        <location address="108" convert="1" type="3" unit="" multiple="1" show="23" iec="iec408" fnc_lab="2"/>
+        <location address="109" convert="2" type="3" unit="" multiple="1" show="19" iec="iec409" fnc_lab="3"/>
+        <location address="110" convert="1" type="3" unit="" multiple="1" show="18" iec="iec410" fnc_lab="3"/>
+        <location address="111" convert="2" type="3" unit="" multiple="1" show="18" iec="iec411" fnc_lab="3"/>
+        <location address="112" convert="1" type="3" unit="" multiple="1" show="18" iec="iec412" fnc_lab="3"/>
+        <location address="113" convert="1" type="3" unit="" multiple="1" show="18" iec="iec413" fnc_lab="3"/>
+        <location address="114" convert="1" type="3" unit="" multiple="1" show="18" iec="iec414" fnc_lab="3"/>
+        <location address="115" convert="1" type="3" unit="" multiple="1" show="18" iec="iec415" fnc_lab="2"/>
+        <location address="116" convert="1" type="3" unit="" multiple="1" show="18" iec="iec416" fnc_lab="2"/>
+        <location address="117" convert="1" type="1" unit="角度范围60-87" multiple="1" show="20" iec="iec417" fnc_lab="4"/>
+        <location address="118" convert="1" type="1" unit="角度范围60-87" multiple="1" show="20" iec="iec418" fnc_lab="4"/>
+        <location address="119" convert="1" type="1" unit="角度范围60-87" multiple="1" show="20" iec="iec419" fnc_lab="4"/>
+        <location address="120" convert="1" type="2" unit="速度范围0.5-1" multiple="1" show="20" iec="iec420" fnc_lab="4"/>
+        <location address="121" convert="1" type="2" unit="速度范围0.5-1" multiple="1" show="20" iec="iec421" fnc_lab="4"/>
+        <location address="122" convert="1" type="2" unit="速度范围0.5-1" multiple="1" show="20" iec="iec422" fnc_lab="4"/>
+        <location address="123" convert="1" type="1" unit="设置范围150-2000" multiple="1" show="21" iec="iec423" fnc_lab="4"/>
+        <location address="124" convert="2" type="2" unit="设置范围-800-800" multiple="1" show="21" iec="iec424" fnc_lab="4"/>
+        <location address="125" convert="1" type="3" unit="" multiple="1" show="22" iec="iec425" fnc_lab="2"/>
+        <location address="126" convert="1" type="3" unit="" multiple="1" show="22" iec="iec426" fnc_lab="2"/>
+        <location address="127" convert="1" type="3" unit="" multiple="1" show="2" iec="iec427" fnc_lab="4"/>
+        <location address="128" convert="1" type="3" unit="" multiple="1" show="2" iec="iec428" fnc_lab="4"/>
+        <location address="129" convert="1" type="3" unit="" multiple="1" show="22" iec="iec429" fnc_lab="2"/>
+        <location address="130" convert="1" type="3" unit="" multiple="1" show="2" iec="iec430" fnc_lab="2"/>
+        <location address="131" convert="1" type="3" unit="" multiple="1" show="2" iec="iec431" fnc_lab="2"/>
+        <location address="132" convert="1" type="3" unit="" multiple="1" show="20" iec="iec432" fnc_lab="2"/>
+        <location address="133" convert="1" type="3" unit="" multiple="1" show="20" iec="iec433" fnc_lab="2"/>
+        <location address="134" convert="1" type="3" unit="" multiple="1" show="19" iec="iec434" fnc_lab="2"/>
+        <location address="135" convert="1" type="3" unit="" multiple="1" show="19" iec="iec435" fnc_lab="2"/>
+        <location address="136" convert="1" type="3" unit="" multiple="1" show="19" iec="iec436" fnc_lab="2"/>
+        <location address="137" convert="1" type="3" unit="" multiple="1" show="19" iec="iec437" fnc_lab="2"/>
+        <location address="138" convert="1" type="3" unit="" multiple="1" show="19" iec="iec438" fnc_lab="3"/>
+        <location address="139" convert="1" type="3" unit="" multiple="1" show="23" iec="iec439" fnc_lab="2"/>
+        <location address="140" convert="1" type="3" unit="" multiple="1" show="19" iec="iec440" fnc_lab="3"/>
+        <location address="141" convert="1" type="3" unit="" multiple="1" show="19" iec="iec441" fnc_lab="3"/>
+        <location address="142" convert="1" type="3" unit="" multiple="1" show="20" iec="iec442" fnc_lab="2"/>
+        <location address="143" convert="1" type="3" unit="" multiple="1" show="20" iec="iec443" fnc_lab="2"/>
+        <location address="144" convert="1" type="1" unit="设置范围0-100" multiple="1" show="18" iec="iec444" fnc_lab="4"/>
+
+    </group>
+    //------------wyc添加   end --------------//
+<!--        <location address="15" convert="1" type="4" unit="" multiple="1" show="2" iec="iec15">-->
+<!--            &lt;!&ndash;enum, state：根据地址读取的数据，iec：读取的数值对应的iec标识&ndash;&gt;-->
+<!--            <enum state="0" iec="iec15.enum0"/>-->
+<!--            <enum state="1" iec="iec15.enum1"/>-->
+<!--            <enum state="2" iec="iec15.enum2"/>-->
+<!--            <enum state="3" iec="iec15.enum3"/>-->
+<!--            <enum state="4" iec="iec15.enum4"/>-->
+<!--            <enum state="5" iec="iec15.enum5"/>-->
+<!--            <enum state="6" iec="iec15.enum6"/>-->
+<!--            <enum state="7" iec="iec15.enum7"/>-->
+<!--            <enum state="8" iec="iec15.enum8"/>-->
+<!--            <enum state="9" iec="iec15.enum9"/>-->
+<!--        </location>-->
+<!--        <location address="18" convert="1" type="4" unit="" multiple="1" show="2" iec="iec18">-->
+<!--            <enum state="0" iec="iec18.enum0"/>-->
+<!--            <enum state="10" iec="iec18.enum10"/>-->
+<!--            <enum state="20" iec="iec18.enum20"/>-->
+<!--            <enum state="30" iec="iec18.enum30"/>-->
+<!--            <enum state="40" iec="iec18.enum40"/>-->
+<!--            <enum state="50" iec="iec18.enum50"/>-->
+<!--            <enum state="90" iec="iec18.enum90"/>-->
+<!--        </location>-->
+<!--        <location address="22" convert="1" type="1" unit="" multiple="1" show="2" iec="iec22"/>-->
+<!--        <location address="23" convert="1" type="1" unit="" multiple="1" show="2" iec="iec23"/>-->
+<!--        <location address="27" convert="1" type="1" unit="" multiple="1" show="2" iec="iec27"/>-->
+<!--        <location address="30" convert="1" type="1" unit="" multiple="1" show="2" iec="iec30"/>-->
+<!--        <location address="64" convert="1" type="3" unit="" multiple="1" show="2" iec="iec64"/>-->
+
+<!--        <location address="80" convert="1" type="2" unit="m" multiple="1" show="3" iec="iec80"/>-->
+<!--        <location address="82" convert="1" type="2" unit="kw" multiple="1" show="3" iec="iec82"/>-->
+<!--        <location address="83" convert="1" type="2" unit="kw" multiple="1" show="3" iec="iec83"/>-->
+<!--        <location address="84" convert="1" type="2" unit="kvar" multiple="1" show="3" iec="iec84"/>-->
+<!--        <location address="85" convert="2" type="2" unit="kvar" multiple="1" show="3" iec="iec85"/>-->
+<!--        <location address="86" convert="1" type="1" unit="" multiple="1" show="3" iec="iec86"/>-->
+<!--        <location address="95" convert="1" type="1" unit="" multiple="1" show="3" iec="iec95"/>-->
+<!--    </group>-->
+
+<!--    <group index="2" start="110" end="140">-->
+<!--        <location address="113" convert="2" type="2" unit="g" multiple="10000" show="4" iec="iec113"/>-->
+<!--        <location address="114" convert="2" type="2" unit="g" multiple="10000" show="4" iec="iec114"/>-->
+<!--        <location address="115" convert="2" type="2" unit="g" multiple="10000" show="4" iec="iec115"/>-->
+<!--        <location address="121" convert="2" type="1" unit="" multiple="1" show="1" iec="iec121"/>-->
+<!--        <location address="131" convert="1" type="1" unit="" multiple="100" show="4" iec="iec131"/>-->
+<!--    </group>-->
+
+<!--    <group index="3" start="240" end="250">-->
+<!--        <location address="244" convert="1" type="1" unit="" multiple="1" show="1" iec="iec244"/>-->
+<!--        <location address="245" convert="1" type="1" unit="" multiple="1" show="1" iec="iec245"/>-->
+<!--        <location address="246" convert="1" type="1" unit="" multiple="1" show="1" iec="iec246"/>-->
+<!--        <location address="247" convert="1" type="1" unit="" multiple="1" show="1" iec="iec247"/>-->
+<!--        <location address="248" convert="1" type="1" unit="" multiple="1" show="1" iec="iec248"/>-->
+<!--        <location address="249" convert="1" type="1" unit="" multiple="1" show="1" iec="iec249"/>-->
+<!--    </group>-->
+</configuration>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--language:支持cn（中文），en(英文）-->
+    <!--protocol:通讯协议，例：XE2000,可配置protocol目录下存储的已有通讯协议-->
+    <environment language="cn" protocol="XE2000"/>
+
+    <!--ip: 服务地址-->
+    <!--slave：设备编号-->
+    <!--port：端口好-->
+    <!--cycle：采集间隔（单位秒）-->
+    <server ip="127.0.0.1" slave="1" port="502" cycle="1"/>
+
+    <!--界面展示数据分栏-->
+    <!--index: 分栏序号，采集数据地址对应该序号-->
+    <!--iec：分栏标题对应iec标识，用于国际化-->
+    <!--column：每个分栏中显示的列数-->
+
+<!--    <show index="1" iec="show.iec01" column="3"/>-->
+<!--    <show index="2" iec="show.iec02" column="4"/>-->
+<!--    <show index="3" iec="show.iec03" column="3"/>-->
+<!--    <show index="4" iec="show.iec04" column="2"/>-->
+<!--    <show index="5" iec="show.iec05" column="3"/>-->
+<!--    <show index="6" iec="show.iec06" column="3"/>-->
+
+    //------------zh添加   start --------------//
+<!--    <show index="1" iec="show.iec01" column="2"/>-->
+    <show index="1" iec="show.iec01" column="3"  />
+    <show index="2" iec="show.iec02" column="1"  />
+    <show index="3" iec="show.iec03" column="3"  />
+    <show index="4" iec="show.iec04" column="3"  />
+    <show index="5" iec="show.iec05" column="3"  />
+    <show index="6" iec="show.iec06" column="3"  />
+    <show index="7" iec="show.iec07" column="3"  />
+    <show index="8" iec="show.iec08" column="3"  />
+    <show index="9" iec="show.iec09" column="3"  />
+    <show index="10" iec="show.iec10" column="4"  />
+    <show index="11" iec="show.iec11" column="3"  />
+    <show index="12" iec="show.iec12" column="3"  />
+    <show index="13" iec="show.iec13" column="4"  />
+    <show index="14" iec="show.iec14" column="3"  />
+    <show index="15" iec="show.iec15" column="3"  />
+    <show index="16" iec="show.iec16" column="4"  />
+    <show index="17" iec="show.iec17" column="3"  />
+    <show index="18" iec="show.iec18" column="3"  />
+    <show index="19" iec="show.iec19" column="3"  />
+    <show index="20" iec="show.iec20" column="2"  />
+    <show index="21" iec="show.iec21" column="3"  />
+    <show index="22" iec="show.iec22" column="3"  />
+    <show index="23" iec="show.iec23" column="3"  />
+    //------------zh添加   stop --------------//
+
+</configuration>
