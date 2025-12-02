@@ -1,101 +1,149 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.paint.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="rootPane" maxHeight="600.0" maxWidth="800.0" minHeight="573.0" minWidth="783.0" prefHeight="573.0" prefWidth="795.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.goldwind.javafxboot.ctrl.MainCtrl">
-    <children>
-      <BorderPane fx:id="borderPane" layoutX="1.0" layoutY="1.0" prefHeight="540.0" prefWidth="785.0">
-         <top>
-            <Pane BorderPane.alignment="CENTER">
-               <children>
-                  <GridPane prefHeight="89.0" prefWidth="795.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="386.0" minWidth="10.0" prefWidth="202.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="584.0" minWidth="10.0" prefWidth="583.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <ImageView fitHeight="91.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/微信图片_20240926162602.jpg" />
-                           </image>
-                        </ImageView>
-                        <Label prefHeight="67.0" prefWidth="436.0" text="2MW机组塔底柜控制面板" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-                           <font>
-                              <Font size="36.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </GridPane>
-               </children>
-            </Pane>
-         </top>
-         <center>
-              <TabPane fx:id="tabPane" prefHeight="372.0" prefWidth="785.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER" />
-         </center>
-         <bottom>
-            <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="780.0" BorderPane.alignment="CENTER_RIGHT">
-               <children>
-                  <GridPane prefHeight="50.0" prefWidth="785.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints maxHeight="32.0" minHeight="0.0" prefHeight="0.0" />
-                        <RowConstraints maxHeight="41.0" minHeight="9.0" prefHeight="41.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Button fx:id="btn_start" mnemonicParsing="false" onAction="#btn_startClick" prefHeight="100.0" prefWidth="150.0" text="启动" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
-                        <Button fx:id="btn_stop" mnemonicParsing="false" onAction="#btn_stopClick" prefHeight="100.0" prefWidth="150.0" text="停止" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
-                        <Button fx:id="btn_reset" mnemonicParsing="false" onAction="#btn_resetClick" prefHeight="100.0" prefWidth="150.0" text="复位" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Button fx:id="btn_maintain" mnemonicParsing="false" onAction="#btn_maintainClick" prefHeight="100.0" prefWidth="150.0" text="维护" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Button fx:id="btn_examination" mnemonicParsing="false" onAction="#btn_examinationClick" prefHeight="100.0" prefWidth="150.0" text="定检" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                     </children>
-                  </GridPane>
-                  <GridPane prefHeight="102.0" prefWidth="785.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.0" minWidth="10.0" prefWidth="73.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="523.0" minWidth="10.0" prefWidth="523.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                          <Button fx:id="btnConnect" alignment="CENTER" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#onBtnConnectClick" prefHeight="104.0" prefWidth="114.0" text="▶">
-                              <font>
-                                  <Font size="24.0" />
-                              </font>
-                          </Button>
-                          <TextArea fx:id="txtAreaData" editable="false" prefHeight="79.0" prefWidth="785.0" GridPane.columnIndex="1" />
-                          <Label fx:id="labTime" alignment="CENTER_RIGHT" GridPane.columnIndex="2" />
-                     </children>
-                  </GridPane>
-               </children>
+<BorderPane fx:id="rootPane" maxHeight="600.0" maxWidth="900.0" minHeight="600.0" minWidth="850.0" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.goldwind.javafxboot.ctrl.MainCtrl">
+    <top>
+        <VBox spacing="10.0" BorderPane.alignment="CENTER_LEFT">
+            <HBox alignment="CENTER_LEFT" spacing="15.0" padding="10.0">
+                <ImageView fitHeight="60.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../image/微信图片_20240926162602.jpg" />
+                    </image>
+                </ImageView>
+                <Label text="2MW机组塔底柜控制面板" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font size="28.0" />
+                    </font>
+                </Label>
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="labTime" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10.0" padding="0 10 10 10">
+                <Button mnemonicParsing="false" onAction="#showHome" text="主页" />
+                <Button mnemonicParsing="false" onAction="#showComponents" text="部件" />
+                <Button mnemonicParsing="false" onAction="#showFaults" text="故障" />
+                <Button mnemonicParsing="false" onAction="#showLogin" text="登录" />
+                <Button mnemonicParsing="false" onAction="#showControl" text="控制" />
+            </HBox>
+        </VBox>
+    </top>
+    <center>
+        <StackPane fx:id="contentStack">
+            <BorderPane fx:id="homePane" visible="false">
+                <center>
+                    <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" prefHeight="380.0" prefWidth="900.0" BorderPane.alignment="CENTER" />
+                </center>
+                <bottom>
+                    <VBox spacing="8.0" padding="10.0" BorderPane.alignment="CENTER_LEFT">
+                        <HBox spacing="10.0">
+                            <Button fx:id="btnConnect" alignment="CENTER" minHeight="40.0" minWidth="60.0" mnemonicParsing="false" onAction="#onBtnConnectClick" text="▶">
+                                <font>
+                                    <Font size="18.0" />
+                                </font>
+                            </Button>
+                            <TextArea fx:id="txtAreaData" editable="false" prefHeight="120.0" prefWidth="700.0" VBox.vgrow="ALWAYS" />
+                        </HBox>
+                    </VBox>
+                </bottom>
+            </BorderPane>
+
+            <BorderPane fx:id="componentPane" visible="false" padding="10.0">
+                <left>
+                    <VBox spacing="8.0" prefWidth="180.0" BorderPane.alignment="TOP_CENTER">
+                        <Button fx:id="component_system" mnemonicParsing="false" onAction="#showComponentDetail" text="系统信息" maxWidth="Infinity" />
+                        <Button fx:id="component_pitch" mnemonicParsing="false" onAction="#showComponentDetail" text="变桨系统" maxWidth="Infinity" />
+                        <Button fx:id="component_converter" mnemonicParsing="false" onAction="#showComponentDetail" text="变流器" maxWidth="Infinity" />
+                        <Button fx:id="component_vibration" mnemonicParsing="false" onAction="#showComponentDetail" text="振动监测" maxWidth="Infinity" />
+                        <Button fx:id="component_wind" mnemonicParsing="false" onAction="#showComponentDetail" text="测风系统" maxWidth="Infinity" />
+                        <Button fx:id="component_grid" mnemonicParsing="false" onAction="#showComponentDetail" text="电网" maxWidth="Infinity" />
+                        <Button fx:id="component_yaw" mnemonicParsing="false" onAction="#showComponentDetail" text="偏航" maxWidth="Infinity" />
+                        <Button fx:id="component_cooling" mnemonicParsing="false" onAction="#showComponentDetail" text="冷却系统" maxWidth="Infinity" />
+                        <Button fx:id="component_drive" mnemonicParsing="false" onAction="#showComponentDetail" text="传动链" maxWidth="Infinity" />
+                    </VBox>
+                </left>
+                <center>
+                    <VBox spacing="10.0" BorderPane.alignment="CENTER">
+                        <Label fx:id="componentTitle" text="系统信息" style="-fx-font-size: 20; -fx-font-weight: bold;" />
+                        <StackPane fx:id="componentContentStack" prefHeight="350.0" prefWidth="600.0" style="-fx-border-color: #E0E0E0; -fx-border-radius: 4;">
+                            <VBox fx:id="systemInfoPane" alignment="CENTER" visible="false">
+                                <Label text="系统信息界面" />
+                            </VBox>
+                            <VBox fx:id="pitchPane" alignment="CENTER" visible="false">
+                                <Label text="变桨系统界面" />
+                            </VBox>
+                            <VBox fx:id="converterPane" alignment="CENTER" visible="false">
+                                <Label text="变流器界面" />
+                            </VBox>
+                            <VBox fx:id="vibrationPane" alignment="CENTER" visible="false">
+                                <Label text="振动监测界面" />
+                            </VBox>
+                            <VBox fx:id="windPane" alignment="CENTER" visible="false">
+                                <Label text="测风系统界面" />
+                            </VBox>
+                            <VBox fx:id="gridPane" alignment="CENTER" visible="false">
+                                <Label text="电网界面" />
+                            </VBox>
+                            <VBox fx:id="yawPane" alignment="CENTER" visible="false">
+                                <Label text="偏航界面" />
+                            </VBox>
+                            <VBox fx:id="coolingPane" alignment="CENTER" visible="false">
+                                <Label text="冷却系统界面" />
+                            </VBox>
+                            <VBox fx:id="driveTrainPane" alignment="CENTER" visible="false">
+                                <Label text="传动链界面" />
+                            </VBox>
+                        </StackPane>
+                    </VBox>
+                </center>
+            </BorderPane>
+
+            <VBox fx:id="faultPane" alignment="CENTER" spacing="10.0" padding="20.0" visible="false">
+                <Label text="故障信息" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+                <TextArea editable="false" promptText="故障记录将在此显示" prefHeight="350.0" prefWidth="700.0" />
             </VBox>
-         </bottom>
-      </BorderPane>
-      <Pane fx:id="paneAction" disable="true" layoutX="272.0" layoutY="-166.0" prefHeight="52.0" prefWidth="294.0">
-         <children>
-              <Button fx:id="btnAction" alignment="CENTER" layoutX="226.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#onBtnActionClick" text="下发" />
-              <TextField fx:id="txtActionValue" alignment="CENTER" layoutX="145.0" prefHeight="50.0" prefWidth="73.0" promptText="value" text="1321" />
-              <TextField fx:id="txtActionAddress" alignment="CENTER" layoutX="99.0" prefHeight="50.0" prefWidth="39.0" promptText="address" text="7" />
-         </children>
-      </Pane>
-    </children>
-</Pane>
+
+            <VBox fx:id="loginPane" alignment="CENTER" spacing="10.0" padding="20.0" visible="false">
+                <Label text="登录" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+                <TextField promptText="用户名" prefWidth="300.0" />
+                <PasswordField promptText="密码" prefWidth="300.0" />
+                <Button mnemonicParsing="false" text="登录" />
+            </VBox>
+
+            <VBox fx:id="controlPane" alignment="TOP_CENTER" spacing="15.0" padding="20.0" visible="false">
+                <Label text="控制台" style="-fx-font-size: 18; -fx-font-weight: bold;" />
+                <GridPane hgap="10.0" vgap="10.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Button fx:id="btn_start" mnemonicParsing="false" onAction="#btn_startClick" prefHeight="60.0" prefWidth="120.0" text="启动" GridPane.columnIndex="0" />
+                        <Button fx:id="btn_stop" mnemonicParsing="false" onAction="#btn_stopClick" prefHeight="60.0" prefWidth="120.0" text="停止" GridPane.columnIndex="1" />
+                        <Button fx:id="btn_reset" mnemonicParsing="false" onAction="#btn_resetClick" prefHeight="60.0" prefWidth="120.0" text="复位" GridPane.columnIndex="2" />
+                        <Button fx:id="btn_maintain" mnemonicParsing="false" onAction="#btn_maintainClick" prefHeight="60.0" prefWidth="120.0" text="维护" GridPane.columnIndex="3" />
+                        <Button fx:id="btn_examination" mnemonicParsing="false" onAction="#btn_examinationClick" prefHeight="60.0" prefWidth="120.0" text="定检" GridPane.columnIndex="4" />
+                    </children>
+                </GridPane>
+                <Pane fx:id="paneAction" disable="true" prefHeight="80.0" prefWidth="400.0">
+                    <children>
+                        <Button fx:id="btnAction" alignment="CENTER" layoutX="250.0" minHeight="40.0" minWidth="60.0" mnemonicParsing="false" onAction="#onBtnActionClick" text="下发" />
+                        <TextField fx:id="txtActionValue" alignment="CENTER" layoutX="150.0" prefHeight="40.0" prefWidth="80.0" promptText="value" text="1321" />
+                        <TextField fx:id="txtActionAddress" alignment="CENTER" layoutX="100.0" prefHeight="40.0" prefWidth="40.0" promptText="address" text="7" />
+                    </children>
+                </Pane>
+            </VBox>
+        </StackPane>
+    </center>
+</BorderPane>

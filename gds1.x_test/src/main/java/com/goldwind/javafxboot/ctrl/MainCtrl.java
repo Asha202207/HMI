@@ -5,9 +5,8 @@ import com.goldwind.javafxboot.model.SettingEnum;
 import com.goldwind.javafxboot.model.SettingGroup;
 import com.goldwind.javafxboot.model.SettingLocation;
 import com.goldwind.javafxboot.model.SettingShow;
-import com.goldwind.javafxboot.protocol.modbus.domain.datatype.numeric.P_AB;
 import com.goldwind.javafxboot.protocol.modbus.exceptiom.ModbusException;
-import com.goldwind.javafxboot.service.ThreadScheduledService;
+import com.goldwind.javafxboot.service.HmiDataFacade;
 import com.goldwind.javafxboot.util.InitAppSetting;
 import de.felixroske.jfxsupport.FXMLController;
 import javafx.animation.Animation;
@@ -20,11 +19,11 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import java.math.BigDecimal;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -43,6 +42,23 @@ public class MainCtrl implements Initializable {
     // 主容器
     public Pane rootPane;
     public Pane paneAction;
+    public StackPane contentStack;
+    public Pane homePane;
+    public Pane componentPane;
+    public Pane faultPane;
+    public Pane loginPane;
+    public Pane controlPane;
+    public StackPane componentContentStack;
+    public Pane systemInfoPane;
+    public Pane pitchPane;
+    public Pane converterPane;
+    public Pane vibrationPane;
+    public Pane windPane;
+    public Pane gridPane;
+    public Pane yawPane;
+    public Pane coolingPane;
+    public Pane driveTrainPane;
+    public Label componentTitle;
     // 控件
     public Label labTime;
     public TextArea txtAreaData;
@@ -50,7 +66,7 @@ public class MainCtrl implements Initializable {
     public TextField txtActionValue;
     public TabPane tabPane;
     public Button btnConnect;
-//    public Button btnAction;
+    //    public Button btnAction;
 
 
     //------------wyc添加   start --------------//
@@ -63,9 +79,11 @@ public class MainCtrl implements Initializable {
     //------------wyc添加   end --------------//
 
     private ResourceBundle messages;
-    private ThreadScheduledService threadScheduledService;
     private String currentTab = "";
     private final Map<String, List<SettingLocation>> tabLocation = new HashMap<>();
+    private final Map<String, Pane> navigationViews = new HashMap<>();
+    private final Map<String, Pane> componentViews = new HashMap<>();
+    private final HmiDataFacade hmiDataFacade = new HmiDataFacade();
     DateFormat currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @SneakyThrows
@@ -79,43 +97,24 @@ public class MainCtrl implements Initializable {
         initTabPaneControl();
         // 初始化时间计时控件
         initTimeControl();
+        // 初始化导航
+        initNavigation();
+        // 初始化协议回调
+        hmiDataFacade.setDataConsumer(this::handleDataUpdate);
     }
 
     public void onBtnConnectClick(ActionEvent actionEvent) {
         try {
-            if (threadScheduledService != null) {
-                if (threadScheduledService.isRunning()) {
-                    threadScheduledService.cancel();
-                    btnConnect.setStyle("-fx-text-fill: green;");
-                    btnConnect.setText("▶");
-                    paneAction.setDisable(true);
-                } else {
-                    threadScheduledService.restart();
-                    btnConnect.setStyle("-fx-text-fill: red;");
-                    btnConnect.setText("●");
-                    paneAction.setDisable(false);
-                }
+            if (hmiDataFacade.isConnected()) {
+                hmiDataFacade.disconnect();
+                btnConnect.setStyle("-fx-text-fill: green;");
+                btnConnect.setText("▶");
+                paneAction.setDisable(true);
             } else {
+                hmiDataFacade.connect();
                 btnConnect.setStyle("-fx-text-fill: red;");
                 btnConnect.setText("●");
                 paneAction.setDisable(false);
-                threadScheduledService = new ThreadScheduledService("modbus-tcp service");
-                //上次运行开始和下一次运行开始之间允许的最短时间。
-                threadScheduledService.setPeriod(Duration.millis(InitAppSetting.getSetting().getSettingServer().getCycle() * 1000.0));
-                //ScheduledService 首次启动与开始运行之间的初始延迟。
-                threadScheduledService.setDelay(Duration.millis(500));
-                //设置 ScheduledService 是否应在 Task 失败的情况下自动重新启动。
-                threadScheduledService.setRestartOnFailure(false);
-
-                //给ScheduledService添加Task执行成功事件
-                threadScheduledService.setOnSucceeded(t -> {
-                    //获取Task返回的值
-                    if (t.getSource().getValue() != null && !((Map<Integer, Object>) t.getSource().getValue()).isEmpty()) {
-                        txtAreaData.appendText("[" + DateUtil.now() + "] " + t.getSource().getValue() + "\n");
-                        loadModbusData((Map<Integer, Object>) t.getSource().getValue());
-                    }
-                });
-                threadScheduledService.start();
             }
         } catch (Exception e) {
             log.error("error: ", e);
@@ -125,57 +124,35 @@ public class MainCtrl implements Initializable {
     //------------wyc添加   start --------------//
     //启动按钮按下
     public void btn_startClick (ActionEvent event) throws ModbusException {
-        if (threadScheduledService != null && threadScheduledService.isRunning()) {
-            threadScheduledService.postAction(
-                    Integer.parseInt("102")
-                    , new P_AB().setValue(BigDecimal.valueOf(Integer.parseInt("1"))));
-        }
+        writeCommand(102, 1);
     }
 
     //停止按钮按下
     public void btn_stopClick (ActionEvent event) throws ModbusException {
-        if (threadScheduledService != null && threadScheduledService.isRunning()) {
-            threadScheduledService.postAction(
-                    Integer.parseInt("104")
-                    , new P_AB().setValue(BigDecimal.valueOf(Integer.parseInt("1"))));
-        }
+        writeCommand(104, 1);
     }
 
     //复位按钮按下
     public void btn_resetClick (ActionEvent event) throws ModbusException {
-        if (threadScheduledService != null && threadScheduledService.isRunning()) {
-            threadScheduledService.postAction(
-                    Integer.parseInt("103")
-                    , new P_AB().setValue(BigDecimal.valueOf(Integer.parseInt("1"))));
-        }
+        writeCommand(103, 1);
     }
 
     //维护按钮按下
     public void btn_maintainClick (ActionEvent event) throws ModbusException {
-        if (threadScheduledService != null && threadScheduledService.isRunning()) {
-            threadScheduledService.postAction(
-                    Integer.parseInt("105")
-                    , new P_AB().setValue(BigDecimal.valueOf(Integer.parseInt("1"))));
-        }
+        writeCommand(105, 1);
     }
 
     //定检按钮按下
     public void btn_examinationClick (ActionEvent event) throws ModbusException {
-        if (threadScheduledService != null && threadScheduledService.isRunning()) {
-            threadScheduledService.postAction(
-                    Integer.parseInt("106")
-                    , new P_AB().setValue(BigDecimal.valueOf(Integer.parseInt("1"))));
-        }
+        writeCommand(106, 1);
     }
 
     //Modbus发送函数
     public void mb_SendData(int addr, int senddata) {
 
-        if (threadScheduledService != null && threadScheduledService.isRunning()) {
+        if (hmiDataFacade.isConnected()) {
             try {
-                threadScheduledService.postAction(
-                        addr
-                        , new P_AB().setValue(BigDecimal.valueOf(senddata)));
+                hmiDataFacade.writeRegister(addr, senddata);
             } catch (ModbusException e) {
                 // 处理异常，打印错误信息
                 txtAreaData.appendText("[" + DateUtil.now() + "] " + "Modbus响应异常！(Modbus response exception!)" + "\n");
@@ -193,11 +170,8 @@ public class MainCtrl implements Initializable {
 
 
     public void onBtnActionClick() throws ModbusException {
-        if (threadScheduledService != null && threadScheduledService.isRunning()) {
-            threadScheduledService.postAction(
-                    Integer.parseInt(txtActionAddress.textProperty().getValue())
-                    , new P_AB().setValue(BigDecimal.valueOf(Integer.parseInt(txtActionValue.textProperty().getValue()))));
-        }
+        writeCommand(Integer.parseInt(txtActionAddress.textProperty().getValue())
+                , Integer.parseInt(txtActionValue.textProperty().getValue()));
     }
 
     private void initDefaultSetting() {
@@ -219,7 +193,6 @@ public class MainCtrl implements Initializable {
         // 控件文本国际化
 //        btnAction.setText(messages.getString("main.action"));
     }
-
 
 
 
@@ -295,7 +268,7 @@ public class MainCtrl implements Initializable {
                     btnValue.setId("btnvalue_fnc2" + settingLocation.getAddress());
                     // 添加按钮的点击事件处理器
                     btnValue.setOnAction((event) -> {
-                        if (threadScheduledService != null && threadScheduledService.isRunning()){
+                        if (hmiDataFacade.isConnected()){
                             mb_SendData(settingLocation.getAddress(),1);
                         }
                         else {
@@ -324,7 +297,7 @@ public class MainCtrl implements Initializable {
                     ToggleButton toggleButton = new ToggleButton(lbNameText);
                     toggleButton.setOnAction((event) -> {
                         //判断modbusTCP是否建立连接，未连接则禁止状态开关按钮按下
-                        if (threadScheduledService != null && threadScheduledService.isRunning()){
+                        if (hmiDataFacade.isConnected()){
                             if (toggleButton.isSelected()) {
                                 lbBtState.setText(" -√- ");
                                 mb_SendData(settingLocation.getAddress(),1);
@@ -358,7 +331,7 @@ public class MainCtrl implements Initializable {
                     //btnValue.setId("btnvalue_fnc4" + settingLocation.getAddress());
                     // 添加按钮的点击事件处理器
                     btnValue.setOnAction((event) -> {
-                        if (threadScheduledService != null && threadScheduledService.isRunning()){
+                        if (hmiDataFacade.isConnected()){
                             String tfValueStr = TFInput.getText();
                             try {
                                 int tfValueInt = Integer.parseInt(tfValueStr);
@@ -417,6 +390,25 @@ public class MainCtrl implements Initializable {
         Timeline animation = new Timeline(new KeyFrame(Duration.millis(1000), eventHandler));
         animation.setCycleCount(Animation.INDEFINITE);
         animation.play();
+    }
+
+    private void initNavigation() {
+        navigationViews.put("home", homePane);
+        navigationViews.put("components", componentPane);
+        navigationViews.put("fault", faultPane);
+        navigationViews.put("login", loginPane);
+        navigationViews.put("control", controlPane);
+        componentViews.put("component_system", systemInfoPane);
+        componentViews.put("component_pitch", pitchPane);
+        componentViews.put("component_converter", converterPane);
+        componentViews.put("component_vibration", vibrationPane);
+        componentViews.put("component_wind", windPane);
+        componentViews.put("component_grid", gridPane);
+        componentViews.put("component_yaw", yawPane);
+        componentViews.put("component_cooling", coolingPane);
+        componentViews.put("component_drive", driveTrainPane);
+        showView("home");
+        showComponentView("component_system", "系统信息");
     }
 
     private void loadModbusData(Map<Integer, Object> readMapData) {
@@ -478,6 +470,64 @@ public class MainCtrl implements Initializable {
                     ((Button) node.get()).setStyle("-fx-text-fill: red;");
                 }
             }
+        }
+    }
+
+    public void showHome(ActionEvent event) {
+        showView("home");
+    }
+
+    public void showComponents(ActionEvent event) {
+        showView("components");
+    }
+
+    public void showFaults(ActionEvent event) {
+        showView("fault");
+    }
+
+    public void showLogin(ActionEvent event) {
+        showView("login");
+    }
+
+    public void showControl(ActionEvent event) {
+        showView("control");
+    }
+
+    public void showComponentDetail(ActionEvent event) {
+        Button button = (Button) event.getSource();
+        String componentId = button.getId();
+        showComponentView(componentId, button.getText());
+    }
+
+    private void showView(String key) {
+        navigationViews.values().forEach(p -> p.setVisible(false));
+        Pane target = navigationViews.get(key);
+        if (target != null) {
+            target.setVisible(true);
+            target.toFront();
+        }
+    }
+
+    private void showComponentView(String key, String title) {
+        componentViews.values().forEach(p -> p.setVisible(false));
+        Pane target = componentViews.get(key);
+        if (target != null) {
+            target.setVisible(true);
+            target.toFront();
+        }
+        componentTitle.setText(title);
+    }
+
+    private void handleDataUpdate(Map<Integer, Object> data) {
+        txtAreaData.appendText("[" + DateUtil.now() + "] " + data + "\n");
+        loadModbusData(data);
+    }
+
+    private void writeCommand(int address, int value) throws ModbusException {
+        if (hmiDataFacade.isConnected()) {
+            hmiDataFacade.writeRegister(address, value);
+        } else {
+            txtAreaData.appendText("[" + DateUtil.now() + "] " + "未建立连接！(No connection established!)" + "\n");
         }
     }
 
