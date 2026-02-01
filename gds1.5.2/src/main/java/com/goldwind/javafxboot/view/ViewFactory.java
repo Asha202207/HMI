@@ -161,8 +161,7 @@ public class ViewFactory {
         String[][] components = {
             {"变流器", "5"},    
             {"变桨系统", "4"},   
-            {"测风系统", "7"},   
-            {"偏航系统", "9"},   
+            {"测风/偏航系统", "7"},     
             {"传动链", "11"},    
             {"电网", "8"},       
             {"液压系统", "12"},  
@@ -751,7 +750,7 @@ public class ViewFactory {
         if (settingShow.isPresent()) {
             Node content = createControlGridForShow(settingShow.get());
             dialog.getDialogPane().setContent(content);
-            dialog.getDialogPane().setPrefSize(700, 500);
+            dialog.getDialogPane().setPrefSize(900, 500);
         }
         
         dialog.showAndWait();
@@ -792,22 +791,29 @@ public class ViewFactory {
                 switch (point.getFunctionLabel()) {
                     case 1: // 只读显示
                         addReadOnlyControl(gridPane, point, row, col);
+                        col += 4;
                         break;
                     case 2: // 脉冲按钮
                     case 3: // 保持按钮
                     case 4: // 数据下发
                         // 只读视图中不显示控制类型
                         addReadOnlyControl(gridPane, point, row, col);
+                        col += 4;
                         break;
-                    case 5: // 按位显示
-                        addBitStatusControl(gridPane, point, row, col);
-                        break;
+                    case 5: // 按位显示 - 展开显示所有位
+                        int unitsUsed = addBitStatusControlExpanded(gridPane, point, row, col, maxCol);
+                        col += unitsUsed * 4;
+                        while (col >= maxCol * 4) {
+                            col -= maxCol * 4;
+                            row++;
+                        }
+                        continue; // 跳过下面的通用换行逻辑
                     default:
                         addReadOnlyControl(gridPane, point, row, col);
+                        col += 4;
                 }
             }
             
-            col += 4; // 每个控件占4列
             if (col >= maxCol * 4) {
                 col = 0;
                 row++;
@@ -826,14 +832,41 @@ public class ViewFactory {
      */
     private Node createControlGridForShow(SettingShow show) {
         GridPane gridPane = new GridPane();
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.setPadding(new Insets(15));
+        gridPane.setHgap(5);
+        gridPane.setVgap(8);
+        gridPane.setPadding(new Insets(10));
+        
+        int maxCol = Math.max(show.getColumn(), 3);
+        
+        // 设置列宽约束，确保对齐
+        int totalCols = maxCol * 4; // 每个数据项占4列: 名称、值、单位、分隔符
+        for (int i = 0; i < totalCols; i++) {
+            ColumnConstraints cc = new ColumnConstraints();
+            if (i % 4 == 0) {
+                // 名称列 - 固定宽度
+                cc.setMinWidth(100);
+                cc.setPrefWidth(120);
+                cc.setMaxWidth(150);
+            } else if (i % 4 == 1) {
+                // 值/按钮列
+                cc.setMinWidth(60);
+                cc.setPrefWidth(80);
+            } else if (i % 4 == 2) {
+                // 单位列
+                cc.setMinWidth(30);
+                cc.setPrefWidth(50);
+            } else {
+                // 分隔符列
+                cc.setMinWidth(15);
+                cc.setPrefWidth(15);
+                cc.setMaxWidth(15);
+            }
+            gridPane.getColumnConstraints().add(cc);
+        }
         
         List<PointDefinition> points = dataService.getPointsByShowIndex(show.getIndex());
         
         int row = 0, col = 0;
-        int maxCol = Math.max(show.getColumn(), 3);
         
         for (PointDefinition point : points) {
             if (point.getFunctionLabel() != null) {
@@ -844,20 +877,25 @@ public class ViewFactory {
                         break;
                     case 2: // 脉冲按钮
                         addPulseButtonControl(gridPane, point, row, col);
-                        col += 2;
+                        col += 4;
                         break;
                     case 3: // 保持按钮
                         addToggleButtonControl(gridPane, point, row, col);
-                        col += 3;
+                        col += 4;
                         break;
                     case 4: // 数据下发
                         addDataInputControl(gridPane, point, row, col);
                         col += 4;
                         break;
-                    case 5: // 按位显示
-                        addBitStatusControl(gridPane, point, row, col);
-                        col += 4;
-                        break;
+                    case 5: // 按位显示 - 展开显示所有位
+                        int unitsUsed = addBitStatusControlExpanded(gridPane, point, row, col, maxCol);
+                        // 计算按位显示后的位置
+                        col += unitsUsed * 4;
+                        while (col >= maxCol * 4) {
+                            col -= maxCol * 4;
+                            row++;
+                        }
+                        continue; // 跳过下面的通用换行逻辑
                     default:
                         addReadOnlyControl(gridPane, point, row, col);
                         col += 4;
@@ -883,17 +921,25 @@ public class ViewFactory {
     private void addReadOnlyControl(GridPane grid, PointDefinition point, int row, int col) {
         String labelText = getMessage(point.getIec());
         Label nameLabel = new Label(labelText + ": ");
+        nameLabel.setWrapText(true);
+        nameLabel.setMinWidth(80);
+        nameLabel.setMaxWidth(140);
         nameLabel.setTooltip(new Tooltip(labelText));
         
         Button valueBtn = new Button("--");
         valueBtn.setId("btn_" + point.getName());
+        valueBtn.setMinWidth(60);
         valueBtn.setDisable(true);
         
         Label unitLabel = new Label(point.getUnit() != null ? point.getUnit() : "");
+        unitLabel.setMinWidth(30);
+        
+        Label splitLabel = new Label("|");
         
         grid.add(nameLabel, col, row);
         grid.add(valueBtn, col + 1, row);
         grid.add(unitLabel, col + 2, row);
+        grid.add(splitLabel, col + 3, row);
     }
     
     /**
@@ -902,7 +948,11 @@ public class ViewFactory {
     private void addPulseButtonControl(GridPane grid, PointDefinition point, int row, int col) {
         String labelText = getMessage(point.getIec());
         Button btn = new Button(labelText);
+        btn.setMinWidth(100);
+        btn.setMaxWidth(180);
+        btn.setWrapText(true);
         btn.setStyle("-fx-background-color: #3498db; -fx-text-fill: white;");
+        btn.setTooltip(new Tooltip(labelText));
         
         btn.setOnAction(e -> {
             if (dataService.isConnected()) {
@@ -912,7 +962,10 @@ public class ViewFactory {
             }
         });
         
-        grid.add(btn, col, row);
+        Label splitLabel = new Label("|");
+        
+        grid.add(btn, col, row, 2, 1); // 按钮跨2列
+        grid.add(splitLabel, col + 3, row);
     }
     
     /**
@@ -921,8 +974,13 @@ public class ViewFactory {
     private void addToggleButtonControl(GridPane grid, PointDefinition point, int row, int col) {
         String labelText = getMessage(point.getIec());
         ToggleButton btn = new ToggleButton(labelText);
+        btn.setMinWidth(100);
+        btn.setMaxWidth(140);
+        btn.setWrapText(true);
+        btn.setTooltip(new Tooltip(labelText));
         
         Label statusLabel = new Label("---");
+        statusLabel.setMinWidth(40);
         
         btn.setOnAction(e -> {
             if (dataService.isConnected()) {
@@ -935,8 +993,11 @@ public class ViewFactory {
             }
         });
         
+        Label splitLabel = new Label("|");
+        
         grid.add(btn, col, row);
         grid.add(statusLabel, col + 1, row);
+        grid.add(splitLabel, col + 3, row);
     }
     
     /**
@@ -946,10 +1007,15 @@ public class ViewFactory {
         String labelText = getMessage(point.getIec());
         
         TextField inputField = new TextField();
-        inputField.setPrefWidth(80);
+        inputField.setPrefWidth(70);
+        inputField.setMaxWidth(80);
         
         Button sendBtn = new Button(labelText);
+        sendBtn.setMinWidth(80);
+        sendBtn.setMaxWidth(120);
+        sendBtn.setWrapText(true);
         sendBtn.setStyle("-fx-background-color: #27ae60; -fx-text-fill: white;");
+        sendBtn.setTooltip(new Tooltip(labelText));
         
         sendBtn.setOnAction(e -> {
             if (dataService.isConnected()) {
@@ -965,38 +1031,85 @@ public class ViewFactory {
         });
         
         Label unitLabel = new Label(point.getUnit() != null ? point.getUnit() : "");
+        Label splitLabel = new Label("|");
         
         grid.add(sendBtn, col, row);
         grid.add(inputField, col + 1, row);
         grid.add(unitLabel, col + 2, row);
+        grid.add(splitLabel, col + 3, row);
     }
     
     /**
-     * 添加按位状态控件
+     * 添加按位状态控件 - 显示单个位状态（只显示点位名称和状态）
      */
     private void addBitStatusControl(GridPane grid, PointDefinition point, int row, int col) {
-        // 按位显示每个状态
+        String labelText = getMessage(point.getIec());
+        Label nameLabel = new Label(labelText + ": ");
+        nameLabel.setWrapText(true);
+        nameLabel.setMinWidth(80);
+        nameLabel.setMaxWidth(140);
+        nameLabel.setTooltip(new Tooltip(labelText));
+        
+        Button statusBtn = new Button("●");
+        statusBtn.setId("btnBit_" + point.getAddress());
+        statusBtn.setMinWidth(40);
+        statusBtn.setStyle("-fx-text-fill: red;");
+        
+        Label splitLabel = new Label("|");
+        
+        grid.add(nameLabel, col, row);
+        grid.add(statusBtn, col + 1, row);
+        grid.add(splitLabel, col + 3, row);
+    }
+    
+    /**
+     * 添加按位状态控件 - 展开显示所有位（用于有枚举列表的情况）
+     * @return 返回实际占用的"控件单元"数量（每单元4列）
+     */
+    private int addBitStatusControlExpanded(GridPane grid, PointDefinition point, int row, int col, int maxCol) {
         List<PointDefinition.EnumDefinition> enums = point.getEnumList();
-        int startCol = col;
+        if (enums == null || enums.isEmpty()) {
+            // 没有枚举列表，使用普通显示
+            addBitStatusControl(grid, point, row, col);
+            return 1;
+        }
+        
+        int currentCol = col;
+        int currentRow = row;
+        int unitsUsed = 0;
         
         for (int i = 0; i < enums.size() && i < 16; i++) {
             PointDefinition.EnumDefinition enumDef = enums.get(i);
             String text = getMessage(enumDef.getIec());
             
             Label nameLabel = new Label(text);
+            nameLabel.setWrapText(true);
+            nameLabel.setMinWidth(80);
+            nameLabel.setMaxWidth(140);
+            nameLabel.setTooltip(new Tooltip(text));
+            
             Button statusBtn = new Button("●");
             statusBtn.setId("btnBit_" + point.getAddress() + "_" + i);
+            statusBtn.setMinWidth(40);
             statusBtn.setStyle("-fx-text-fill: red;");
             
-            grid.add(nameLabel, col, row);
-            grid.add(statusBtn, col + 1, row);
+            Label splitLabel = new Label("|");
             
-            col += 2;
-            if (col - startCol >= 8) {
-                col = startCol;
-                row++;
+            grid.add(nameLabel, currentCol, currentRow);
+            grid.add(statusBtn, currentCol + 1, currentRow);
+            grid.add(splitLabel, currentCol + 3, currentRow);
+            
+            currentCol += 4;
+            unitsUsed++;
+            
+            // 如果到达行尾，换行
+            if (currentCol >= maxCol * 4) {
+                currentCol = 0;
+                currentRow++;
             }
         }
+        
+        return unitsUsed;
     }
     
     /**

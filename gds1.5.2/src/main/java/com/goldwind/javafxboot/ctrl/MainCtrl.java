@@ -19,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
@@ -400,40 +401,73 @@ public class MainCtrl implements Initializable {
             gridPane.setHgap(5);
             gridPane.setVgap(5);
 
+            // 设置列宽约束，确保对齐
+            int maxColumn = settingShow.getColumn();
+            int totalCols = maxColumn * 4; // 每个数据项占4列: 名称、值、单位、分隔符
+            for (int i = 0; i < totalCols; i++) {
+                ColumnConstraints cc = new ColumnConstraints();
+                if (i % 4 == 0) {
+                    // 名称列 - 固定宽度，文字可换行
+                    cc.setMinWidth(100);
+                    cc.setPrefWidth(120);
+                    cc.setMaxWidth(150);
+                } else if (i % 4 == 1) {
+                    // 值/按钮列 - 固定宽度
+                    cc.setMinWidth(60);
+                    cc.setPrefWidth(80);
+                } else if (i % 4 == 2) {
+                    // 单位列 - 较小宽度
+                    cc.setMinWidth(30);
+                    cc.setPrefWidth(50);
+                } else {
+                    // 分隔符列 - 最小宽度
+                    cc.setMinWidth(15);
+                    cc.setPrefWidth(15);
+                    cc.setMaxWidth(15);
+                }
+                gridPane.getColumnConstraints().add(cc);
+            }
+
             ScrollPane scrollPane = new ScrollPane();
             scrollPane.setContent(gridPane);
             scrollPane.setFitToHeight(true);
             scrollPane.setFitToWidth(true);
 
             int row = 1;
-            int column = 1;
-            int maxColumn = settingShow.getColumn();
+            int column = 0;
 
             for (SettingLocation settingLocation : currentShowLocation) {
                 if (settingLocation.getFnc_lab() == 1) {
+                    // 只读显示: 名称 + 值 + 单位 + 分隔符
                     String lbNameText = messages.getString(settingLocation.getIec());
                     Label lbName = new Label(lbNameText + ": ");
+                    lbName.setWrapText(true);
+                    lbName.setMaxWidth(140);
                     Tooltip tooltip = new Tooltip(lbNameText);
                     lbName.setTooltip(tooltip);
                     gridPane.add(lbName, column, row);
-                    column++;
 
                     Button btnValue = new Button(" -- ");
                     btnValue.setId("btnValue_" + settingLocation.getAddress());
+                    btnValue.setMinWidth(60);
                     btnValue.setDisable(false);
-                    gridPane.add(btnValue, column, row);
-                    column++;
+                    gridPane.add(btnValue, column + 1, row);
 
                     Label lbUnit = new Label(settingLocation.getUnit());
-                    gridPane.add(lbUnit, column, row);
-                    column++;
+                    gridPane.add(lbUnit, column + 2, row);
 
                     Label lbSplit = new Label("|");
-                    gridPane.add(lbSplit, column, row);
+                    gridPane.add(lbSplit, column + 3, row);
+                    
+                    column += 4;
                 } else if (settingLocation.getFnc_lab() == 2) {
+                    // 脉冲按钮: 按钮(占名称+值列) + 空 + 分隔符
                     String lbNameText = messages.getString(settingLocation.getIec());
                     Button btnValue = new Button(lbNameText);
                     btnValue.setId("btnvalue_fnc2" + settingLocation.getAddress());
+                    btnValue.setMinWidth(120);
+                    btnValue.setMaxWidth(180);
+                    btnValue.setWrapText(true);
                     
                     final int address = settingLocation.getAddress();
                     btnValue.setOnAction((event) -> {
@@ -444,19 +478,23 @@ public class MainCtrl implements Initializable {
                         }
                     });
 
-                    gridPane.add(btnValue, column, row);
-                    column++;
-                    column++;
-                    column++;
+                    gridPane.add(btnValue, column, row, 2, 1); // 跨2列
                     Label lbSplit = new Label("|");
-                    gridPane.add(lbSplit, column, row);
+                    gridPane.add(lbSplit, column + 3, row);
+                    
+                    column += 4;
                 } else if (settingLocation.getFnc_lab() == 3) {
+                    // 保持按钮: 按钮 + 状态 + 空 + 分隔符
                     String lbNameText = messages.getString(settingLocation.getIec());
                     Label lbBtState = new Label(" --- ");
+                    lbBtState.setMinWidth(40);
                     Tooltip tooltip = new Tooltip("按钮状态，---为未按下，-V-为按下");
                     lbBtState.setTooltip(tooltip);
                     
                     ToggleButton toggleButton = new ToggleButton(lbNameText);
+                    toggleButton.setMinWidth(100);
+                    toggleButton.setMaxWidth(140);
+                    toggleButton.setWrapText(true);
                     final int address = settingLocation.getAddress();
                     toggleButton.setOnAction((event) -> {
                         if (dataService.isConnected()) {
@@ -473,19 +511,24 @@ public class MainCtrl implements Initializable {
                         }
                     });
                     gridPane.add(toggleButton, column, row);
-                    column++;
-                    gridPane.add(lbBtState, column, row);
-                    column++;
-                    column++;
+                    gridPane.add(lbBtState, column + 1, row);
                     Label lbSplit = new Label("|");
-                    gridPane.add(lbSplit, column, row);
+                    gridPane.add(lbSplit, column + 3, row);
+                    
+                    column += 4;
                 } else if (settingLocation.getFnc_lab() == 4) {
+                    // 数据下发: 按钮 + 输入框 + 单位 + 分隔符
                     String lbNameText = messages.getString(settingLocation.getIec());
                     TextField tfInput = new TextField("");
                     tfInput.setId("tfivalue_fnc4" + settingLocation.getAddress());
+                    tfInput.setPrefWidth(70);
+                    tfInput.setMaxWidth(80);
                     
                     Button btnValue = new Button(lbNameText);
                     btnValue.setId("btnvalue_fnc4" + settingLocation.getAddress());
+                    btnValue.setMinWidth(80);
+                    btnValue.setMaxWidth(120);
+                    btnValue.setWrapText(true);
                     
                     final int address = settingLocation.getAddress();
                     btnValue.setOnAction((event) -> {
@@ -505,61 +548,46 @@ public class MainCtrl implements Initializable {
                     Label lbUnit = new Label(settingLocation.getUnit());
 
                     gridPane.add(btnValue, column, row);
-                    column++;
-                    gridPane.add(tfInput, column, row);
-                    column++;
-                    gridPane.add(lbUnit, column, row);
-                    column++;
+                    gridPane.add(tfInput, column + 1, row);
+                    gridPane.add(lbUnit, column + 2, row);
                     Label lbSplit = new Label("|");
-                    gridPane.add(lbSplit, column, row);
+                    gridPane.add(lbSplit, column + 3, row);
+                    
+                    column += 4;
                 } else if (settingLocation.getFnc_lab() == 5) {
-                    String lbNameText;
+                    // 按位显示: 每个位占用4列，与其他控件对齐
                     int listsize = settingLocation.getSettingEnumList().size();
                     int listsize_count = 0;
-                    for (int loopList = 0; loopList < (listsize - 1); loopList++) {
-                        lbNameText = messages.getString(settingLocation.getSettingEnumList().get(loopList).getIec());
+                    for (int loopList = 0; loopList < listsize; loopList++) {
+                        String lbNameText = messages.getString(settingLocation.getSettingEnumList().get(loopList).getIec());
                         Label lbName = new Label(lbNameText);
+                        lbName.setWrapText(true);
+                        lbName.setMaxWidth(140);
+                        lbName.setTooltip(new Tooltip(lbNameText));
                         gridPane.add(lbName, column, row);
-                        column++;
 
-                        Button btnValue1 = new Button("--");
+                        Button btnValue = new Button("--");
                         String Idvalue = "btnvalue_fnc5_" + settingLocation.getAddress().toString() + "_" + Integer.toString(listsize_count);
-                        btnValue1.setId(Idvalue);
+                        btnValue.setId(Idvalue);
+                        btnValue.setMinWidth(40);
                         listsize_count++;
-                        gridPane.add(btnValue1, column, row);
-                        column++;
-                        column++;
-                        Label lbSplit1 = new Label("|");
-                        gridPane.add(lbSplit1, column, row);
-                        if (column < maxColumn * 4) {
-                            column++;
-                        } else {
+                        gridPane.add(btnValue, column + 1, row);
+                        
+                        Label lbSplit = new Label("|");
+                        gridPane.add(lbSplit, column + 3, row);
+                        
+                        column += 4;
+                        if (column >= maxColumn * 4) {
                             row++;
-                            column = 1;
+                            column = 0;
                         }
                     }
-                    lbNameText = messages.getString(settingLocation.getSettingEnumList().get(listsize - 1).getIec());
-                    Label lbName2 = new Label(lbNameText);
-                    gridPane.add(lbName2, column, row);
-                    column++;
-
-                    Button btnValue2 = new Button("--");
-                    String Idvalue2 = "btnvalue_fnc5_" + settingLocation.getAddress().toString() + "_" + Integer.toString(listsize_count);
-                    btnValue2.setId(Idvalue2);
-                    listsize_count++;
-                    gridPane.add(btnValue2, column, row);
-
-                    column++;
-                    column++;
-                    Label lbSplit2 = new Label("|");
-                    gridPane.add(lbSplit2, column, row);
+                    continue; // 按位显示已处理换行，跳过下面的通用换行逻辑
                 }
 
-                if (column < maxColumn * 4) {
-                    column++;
-                } else {
+                if (column >= maxColumn * 4) {
                     row++;
-                    column = 1;
+                    column = 0;
                 }
             }
             showTab.setContent(scrollPane);

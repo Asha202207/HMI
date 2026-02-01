@@ -43,10 +43,10 @@
     <show index="17" iec="show.iec17" column="3"  />
     <show index="18" iec="show.iec18" column="3"  />
     <show index="19" iec="show.iec19" column="3"  />
-    <show index="20" iec="show.iec20" column="4"  />
-    <show index="21" iec="show.iec21" column="4"  />
-    <show index="22" iec="show.iec22" column="4"  />
-    <show index="23" iec="show.iec23" column="4"  />
+    <show index="20" iec="show.iec20" column="3"  />
+    <show index="21" iec="show.iec21" column="3"  />
+    <show index="22" iec="show.iec22" column="3"  />
+    <show index="23" iec="show.iec23" column="3"  />
 
     //------------zh添加   stop --------------//
 
