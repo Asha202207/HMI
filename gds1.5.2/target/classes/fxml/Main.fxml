@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.paint.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="rootPane" maxHeight="600.0" maxWidth="800.0" minHeight="573.0" minWidth="783.0" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.goldwind.javafxboot.ctrl.MainCtrl">
+    <children>
+        <BorderPane fx:id="borderPane" layoutX="0.0" layoutY="0.0" prefHeight="600.0" prefWidth="800.0">
+            <!-- 顶部：标题栏 -->
+            <top>
+                <HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to right, #2c3e50, #3498db);" BorderPane.alignment="CENTER">
+                    <children>
+                        <ImageView fitHeight="70.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../image/微信图片_20240926162602.jpg" />
+                            </image>
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin>
+                        </ImageView>
+                        <Label prefHeight="60.0" prefWidth="500.0" text="2MW机组塔底柜控制面板" textFill="WHITE" alignment="CENTER">
+                            <font>
+                                <Font name="Microsoft YaHei Bold" size="32.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="20.0" />
+                            </HBox.margin>
+                        </Label>
+                        <Label fx:id="labTime" alignment="CENTER_RIGHT" prefWidth="150.0" textFill="WHITE">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets right="10.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                </HBox>
+            </top>
+            
+            <!-- 中间：主内容区域 -->
+            <center>
+                <StackPane fx:id="contentArea" prefHeight="380.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+                    <!-- 内容将通过代码动态加载 -->
+                    <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" />
+                </StackPane>
+            </center>
+            
+            <!-- 底部：操作按钮区 + 导航栏 -->
+            <bottom>
+                <VBox prefHeight="140.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <!-- 操作按钮区：启机、停机、复位、维护 -->
+                        <HBox alignment="CENTER" prefHeight="50.0" spacing="15.0" style="-fx-background-color: #ecf0f1; -fx-padding: 5;">
+                            <children>
+                                <Button fx:id="btn_start" mnemonicParsing="false" onAction="#btn_startClick" prefHeight="40.0" prefWidth="120.0" text="启机" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5px;">
+                                </Button>
+                                <Button fx:id="btn_stop" mnemonicParsing="false" onAction="#btn_stopClick" prefHeight="40.0" prefWidth="120.0" text="停机" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5px;">
+                                </Button>
+                                <Button fx:id="btn_reset" mnemonicParsing="false" onAction="#btn_resetClick" prefHeight="40.0" prefWidth="120.0" text="复位" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 5px;">
+                                </Button>
+                                <ToggleButton fx:id="tbtn_maintain" mnemonicParsing="false" onAction="#tbtn_maintainClick" prefHeight="40.0" prefWidth="120.0" text="维护" style="-fx-font-size: 14px; -fx-background-radius: 5px;">
+                                </ToggleButton>
+                            </children>
+                        </HBox>
+                        
+                        <!-- 状态信息区 -->
+                        <HBox alignment="CENTER" prefHeight="40.0" spacing="10.0" style="-fx-background-color: #bdc3c7; -fx-padding: 5;">
+                            <children>
+                                <Button fx:id="btnConnect" alignment="CENTER" mnemonicParsing="false" onAction="#onBtnConnectClick" prefHeight="30.0" prefWidth="50.0" text="▶" style="-fx-font-size: 18px; -fx-text-fill: green;">
+                                </Button>
+                                <TextArea fx:id="txtAreaData" editable="false" prefHeight="30.0" prefWidth="620.0" wrapText="true">
+                                </TextArea>
+                            </children>
+                        </HBox>
+                        
+                        <!-- 导航栏：主界面、部件、故障、登录、控制 -->
+                        <HBox alignment="CENTER" prefHeight="50.0" spacing="0.0" style="-fx-background-color: #34495e;">
+                            <children>
+                                <Button fx:id="navMain" mnemonicParsing="false" onAction="#navMainClick" prefHeight="50.0" prefWidth="160.0" text="主界面" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 0;">
+                                </Button>
+                                <Button fx:id="navComponent" mnemonicParsing="false" onAction="#navComponentClick" prefHeight="50.0" prefWidth="160.0" text="部件" style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 0;">
+                                </Button>
+                                <Button fx:id="navFault" mnemonicParsing="false" onAction="#navFaultClick" prefHeight="50.0" prefWidth="160.0" text="故障" style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 0;">
+                                </Button>
+                                <Button fx:id="navLogin" mnemonicParsing="false" onAction="#navLoginClick" prefHeight="50.0" prefWidth="160.0" text="登录" style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 0;">
+                                </Button>
+                                <Button fx:id="navControl" mnemonicParsing="false" onAction="#navControlClick" prefHeight="50.0" prefWidth="160.0" text="控制" style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 0;">
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </bottom>
+        </BorderPane>
+    </children>
+</Pane>

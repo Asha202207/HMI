@@ -1,0 +1,372 @@
+/* 主样式表 - 2MW机组塔底柜控制面板 */
+
+.root {
+    -fx-background-color: #f5f6fa;
+    -fx-font-family: "Microsoft YaHei", "SimHei", sans-serif;
+}
+
+/* ==================== 标题栏 ==================== */
+
+.title-bar {
+    -fx-background-color: linear-gradient(to right, #2c3e50, #3498db);
+}
+
+.title-label {
+    -fx-text-fill: white;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+}
+
+/* ==================== 导航栏 ==================== */
+
+.nav-bar {
+    -fx-background-color: #34495e;
+}
+
+.nav-button {
+    -fx-background-color: #34495e;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+    -fx-pref-width: 160px;
+    -fx-pref-height: 50px;
+}
+
+.nav-button:hover {
+    -fx-background-color: #2c3e50;
+}
+
+.nav-button-active {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 0;
+}
+
+/* ==================== 操作按钮 ==================== */
+
+.operation-bar {
+    -fx-background-color: #ecf0f1;
+    -fx-padding: 5px;
+}
+
+.btn-start {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-pref-width: 120px;
+    -fx-pref-height: 40px;
+    -fx-cursor: hand;
+}
+
+.btn-start:hover {
+    -fx-background-color: #2ecc71;
+}
+
+.btn-start:pressed {
+    -fx-background-color: #1e8449;
+}
+
+.btn-stop {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-pref-width: 120px;
+    -fx-pref-height: 40px;
+    -fx-cursor: hand;
+}
+
+.btn-stop:hover {
+    -fx-background-color: #ec7063;
+}
+
+.btn-stop:pressed {
+    -fx-background-color: #c0392b;
+}
+
+.btn-reset {
+    -fx-background-color: #f39c12;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-pref-width: 120px;
+    -fx-pref-height: 40px;
+    -fx-cursor: hand;
+}
+
+.btn-reset:hover {
+    -fx-background-color: #f5b041;
+}
+
+.btn-reset:pressed {
+    -fx-background-color: #d68910;
+}
+
+.btn-maintain {
+    -fx-background-color: #9b59b6;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-pref-width: 120px;
+    -fx-pref-height: 40px;
+    -fx-cursor: hand;
+}
+
+.btn-maintain:selected {
+    -fx-background-color: #8e44ad;
+}
+
+/* ==================== 状态栏 ==================== */
+
+.status-bar {
+    -fx-background-color: #bdc3c7;
+    -fx-padding: 5px;
+}
+
+.btn-connect {
+    -fx-font-size: 18px;
+    -fx-background-radius: 5px;
+}
+
+.btn-connect-off {
+    -fx-text-fill: green;
+}
+
+.btn-connect-on {
+    -fx-text-fill: red;
+}
+
+/* ==================== TabPane ==================== */
+
+.tab-pane {
+    -fx-tab-min-width: 80px;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #3498db;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #ecf0f1;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #3498db;
+}
+
+.tab-pane .tab .tab-label {
+    -fx-text-fill: #2c3e50;
+    -fx-font-size: 12px;
+}
+
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* ==================== 数据网格 ==================== */
+
+.data-grid {
+    -fx-padding: 10px;
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
+}
+
+.data-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #2c3e50;
+}
+
+.data-value {
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-min-width: 60px;
+    -fx-pref-height: 25px;
+}
+
+.data-unit {
+    -fx-font-size: 11px;
+    -fx-text-fill: #7f8c8d;
+}
+
+/* ==================== 部件/控制按钮 ==================== */
+
+.component-button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-pref-width: 150px;
+    -fx-pref-height: 80px;
+    -fx-cursor: hand;
+}
+
+.component-button:hover {
+    -fx-background-color: #2980b9;
+}
+
+.component-button:pressed {
+    -fx-background-color: #1f618d;
+}
+
+.control-button {
+    -fx-background-color: #e67e22;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-pref-width: 180px;
+    -fx-pref-height: 80px;
+    -fx-cursor: hand;
+}
+
+.control-button:hover {
+    -fx-background-color: #d35400;
+}
+
+.control-button:pressed {
+    -fx-background-color: #a04000;
+}
+
+/* ==================== 登录界面 ==================== */
+
+.login-container {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-padding: 30px;
+}
+
+.login-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.login-field {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 35px;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.login-button {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+    -fx-pref-width: 100px;
+    -fx-pref-height: 35px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.login-button:hover {
+    -fx-background-color: #2ecc71;
+}
+
+.logout-button {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-pref-width: 100px;
+    -fx-pref-height: 35px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.logout-button:hover {
+    -fx-background-color: #ec7063;
+}
+
+/* ==================== 故障表格 ==================== */
+
+.fault-table {
+    -fx-background-color: white;
+}
+
+.fault-table .column-header {
+    -fx-background-color: #3498db;
+}
+
+.fault-table .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.fault-table .table-row-cell:odd {
+    -fx-background-color: #f8f9fa;
+}
+
+.fault-table .table-row-cell:even {
+    -fx-background-color: white;
+}
+
+/* ==================== 滚动条 ==================== */
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar {
+    -fx-background-color: #ecf0f1;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #bdc3c7;
+    -fx-background-radius: 5px;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #95a5a6;
+}
+
+/* ==================== 工具提示 ==================== */
+
+.tooltip {
+    -fx-background-color: #2c3e50;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-background-radius: 5px;
+    -fx-padding: 5px 10px;
+}
+
+/* ==================== 对话框 ==================== */
+
+.dialog-pane {
+    -fx-background-color: white;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: #3498db;
+}
+
+.dialog-pane .header-panel .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* ==================== 指示灯颜色 ==================== */
+
+.indicator-green {
+    -fx-text-fill: #27ae60;
+}
+
+.indicator-red {
+    -fx-text-fill: #e74c3c;
+}
+
+.indicator-yellow {
+    -fx-text-fill: #f39c12;
+}
+
+.indicator-gray {
+    -fx-text-fill: #95a5a6;
+}

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    点表配置模板文件
+    
+    用途：
+    1. 定义协议点与业务变量的映射关系
+    2. 方便适配不同厂家风机的协议点表
+    3. 只需修改此文件即可适配新的点表，无需修改程序代码
+    
+    使用说明：
+    1. 将此文件复制为实际使用的点表配置文件（如 pointtable_XXX.xml）
+    2. 在 setting.xml 中配置使用的点表文件名
+    3. 根据实际的PLC点表修改地址和配置
+    
+    属性说明：
+    - name: 点名称（业务层使用的唯一标识，英文大写）
+    - address: Modbus寄存器地址
+    - group: 分组索引（每组最多100个地址）
+    - category: 分类（main/pitch/converter/grid等）
+    - dataType: 数据类型（1-int, 2-double, 3-bool, 4-enum, 5-bitStatus）
+    - convert: 数据转换（1-ushort, 2-short）
+    - unit: 单位
+    - multiple: 倍率（原始值除以此值得到实际值）
+    - showIndex: 显示分栏索引
+    - fnc: 功能类型（1-只读, 2-脉冲按钮, 3-保持按钮, 4-数据下发, 5-按位显示）
+    - iec: 国际化标识
+-->
+<pointtable version="1.0" protocol="template">
+    
+    <!-- ==================== 系统控制命令 ==================== -->
+    <category name="system_control" displayName="系统控制">
+        <point name="CMD_START" address="102" group="5" category="system_control" 
+               dataType="1" convert="1" fnc="2" iec="cmd.start" description="启机命令"/>
+        <point name="CMD_STOP" address="104" group="5" category="system_control" 
+               dataType="1" convert="1" fnc="2" iec="cmd.stop" description="停机命令"/>
+        <point name="CMD_RESET" address="103" group="5" category="system_control" 
+               dataType="1" convert="1" fnc="2" iec="cmd.reset" description="复位命令"/>
+        <point name="CMD_MAINTAIN" address="105" group="5" category="system_control" 
+               dataType="1" convert="1" fnc="3" iec="cmd.maintain" description="维护模式"/>
+        <point name="CMD_EXAMINATION" address="106" group="5" category="system_control" 
+               dataType="1" convert="1" fnc="3" iec="cmd.examination" description="定检模式"/>
+    </category>
+    
+    <!-- ==================== 主状态信息 ==================== -->
+    <category name="main" displayName="主状态">
+        <point name="UNIT_STATUS" address="15" group="1" category="main" showIndex="1"
+               dataType="4" convert="1" fnc="1" iec="iec15" description="机组状态">
+            <enum state="0" iec="iec15.enum0" description="通讯中断"/>
+            <enum state="1" iec="iec15.enum1" description="初始化状态"/>
+            <enum state="2" iec="iec15.enum2" description="待机状态"/>
+            <enum state="3" iec="iec15.enum3" description="维护状态"/>
+            <enum state="4" iec="iec15.enum4" description="故障状态"/>
+            <enum state="5" iec="iec15.enum5" description="警告停机"/>
+            <enum state="6" iec="iec15.enum6" description="启动状态"/>
+            <enum state="7" iec="iec15.enum7" description="加速状态"/>
+            <enum state="8" iec="iec15.enum8" description="发电状态"/>
+            <enum state="9" iec="iec15.enum9" description="停机状态"/>
+        </point>
+        <point name="ACTIVE_POWER" address="121" group="2" category="main" showIndex="1"
+               dataType="1" convert="1" unit="kW" multiple="1" fnc="1" iec="iec121" description="有功功率"/>
+        <point name="WIND_SPEED" address="100" group="2" category="main" showIndex="1"
+               dataType="2" convert="1" unit="m/s" multiple="100" fnc="1" iec="iec100" description="实时风速"/>
+        <point name="ROTOR_SPEED" address="107" group="2" category="main" showIndex="1"
+               dataType="2" convert="2" unit="rpm" multiple="100" fnc="1" iec="iec107" description="叶轮转速"/>
+        <point name="PITCH_ANGLE" address="132" group="2" category="main" showIndex="1"
+               dataType="1" convert="2" unit="°" multiple="100" fnc="1" iec="iec132" description="桨叶1位置"/>
+    </category>
+    
+    <!-- ==================== 变桨系统 ==================== -->
+    <category name="pitch" displayName="变桨系统">
+        <point name="PITCH1_POS" address="132" group="2" category="pitch" showIndex="4"
+               dataType="1" convert="2" unit="°" multiple="100" fnc="1" iec="iec132" description="桨叶1位置"/>
+        <point name="PITCH2_POS" address="133" group="2" category="pitch" showIndex="4"
+               dataType="1" convert="2" unit="°" multiple="100" fnc="1" iec="iec133" description="桨叶2位置"/>
+        <point name="PITCH3_POS" address="134" group="2" category="pitch" showIndex="4"
+               dataType="1" convert="2" unit="°" multiple="100" fnc="1" iec="iec134" description="桨叶3位置"/>
+        <point name="PITCH1_SPEED" address="135" group="2" category="pitch" showIndex="4"
+               dataType="2" convert="2" unit="°/s" multiple="100" fnc="1" iec="iec135" description="变桨1限定速度"/>
+        <point name="PITCH2_SPEED" address="136" group="2" category="pitch" showIndex="4"
+               dataType="2" convert="2" unit="°/s" multiple="100" fnc="1" iec="iec136" description="变桨2限定速度"/>
+        <point name="PITCH3_SPEED" address="137" group="2" category="pitch" showIndex="4"
+               dataType="2" convert="2" unit="°/s" multiple="100" fnc="1" iec="iec137" description="变桨3限定速度"/>
+    </category>
+    
+    <!-- ==================== 变流器 ==================== -->
+    <category name="converter" displayName="变流器">
+        <point name="CVT_GRID_IGBT_TEMP" address="184" group="2" category="converter" showIndex="5"
+               dataType="1" convert="2" unit="°C" multiple="1" fnc="1" iec="iec184" description="网侧IGBT温度"/>
+        <point name="CVT_GEN_IGBT_TEMP" address="185" group="2" category="converter" showIndex="5"
+               dataType="1" convert="2" unit="°C" multiple="1" fnc="1" iec="iec185" description="机侧IGBT温度"/>
+        <point name="CVT_DC_VOLTAGE" address="186" group="2" category="converter" showIndex="5"
+               dataType="2" convert="1" unit="V" multiple="10" fnc="1" iec="iec186" description="直流母线电压"/>
+    </category>
+    
+    <!-- ==================== 电网 ==================== -->
+    <category name="grid" displayName="电网">
+        <point name="GRID_VOLTAGE" address="119" group="2" category="grid" showIndex="8"
+               dataType="1" convert="1" unit="V" multiple="1" fnc="1" iec="iec119" description="电网电压"/>
+        <point name="GRID_FREQUENCY" address="120" group="2" category="grid" showIndex="8"
+               dataType="1" convert="1" unit="Hz" multiple="10" fnc="1" iec="iec120" description="电网频率"/>
+        <point name="GRID_ACTIVE_POWER" address="121" group="2" category="grid" showIndex="8"
+               dataType="1" convert="2" unit="kW" multiple="1" fnc="1" iec="iec121" description="有功功率"/>
+        <point name="GRID_REACTIVE_POWER" address="122" group="2" category="grid" showIndex="8"
+               dataType="1" convert="2" unit="kVar" multiple="1" fnc="1" iec="iec122" description="无功功率"/>
+        <point name="POWER_FACTOR" address="131" group="2" category="grid" showIndex="8"
+               dataType="2" convert="1" unit="" multiple="100" fnc="1" iec="iec131" description="功率因数"/>
+    </category>
+    
+    <!-- ==================== 偏航系统 ==================== -->
+    <category name="yaw" displayName="偏航系统">
+        <point name="NACELLE_POSITION" address="200" group="3" category="yaw" showIndex="9"
+               dataType="2" convert="2" unit="°" multiple="10" fnc="1" iec="iec200" description="机舱位置"/>
+        <point name="YAW_SPEED" address="202" group="3" category="yaw" showIndex="9"
+               dataType="2" convert="2" unit="°/s" multiple="100" fnc="1" iec="iec202" description="偏航计算速度"/>
+        <point name="WIND_DEVIATION" address="203" group="3" category="yaw" showIndex="9"
+               dataType="2" convert="1" unit="°" multiple="10" fnc="1" iec="iec203" description="对风偏差角度"/>
+        <point name="YAW_PRESSURE" address="204" group="3" category="yaw" showIndex="9"
+               dataType="2" convert="1" unit="bar" multiple="10" fnc="1" iec="iec204" description="偏航系统压力"/>
+    </category>
+    
+    <!-- ==================== 故障信息 ==================== -->
+    <category name="fault" displayName="故障信息">
+        <point name="FAULT_COUNT" address="40" group="1" category="fault" showIndex="16"
+               dataType="1" convert="1" unit="" multiple="1" fnc="1" iec="iec40" description="总故障个数"/>
+        <point name="FAULT_CODE_1" address="42" group="1" category="fault" showIndex="16"
+               dataType="1" convert="1" unit="" multiple="1" fnc="1" iec="iec42" description="主控故障码1"/>
+        <point name="FAULT_CODE_2" address="43" group="1" category="fault" showIndex="16"
+               dataType="1" convert="1" unit="" multiple="1" fnc="1" iec="iec43" description="主控故障码2"/>
+        <point name="CONVERTER_FAULT" address="52" group="1" category="fault" showIndex="16"
+               dataType="1" convert="1" unit="" multiple="1" fnc="1" iec="iec52" description="变流器故障码"/>
+        <point name="PITCH1_FAULT" address="55" group="1" category="fault" showIndex="16"
+               dataType="1" convert="1" unit="" multiple="1" fnc="1" iec="iec55" description="变桨1故障码"/>
+        <point name="PITCH2_FAULT" address="58" group="1" category="fault" showIndex="16"
+               dataType="1" convert="1" unit="" multiple="1" fnc="1" iec="iec58" description="变桨2故障码"/>
+        <point name="PITCH3_FAULT" address="61" group="1" category="fault" showIndex="16"
+               dataType="1" convert="1" unit="" multiple="1" fnc="1" iec="iec61" description="变桨3故障码"/>
+    </category>
+    
+    <!-- ==================== 控制命令 - 偏航 ==================== -->
+    <category name="yaw_ctrl" displayName="偏航控制">
+        <point name="CMD_YAW_LEFT" address="107" group="5" category="yaw_ctrl" showIndex="23"
+               dataType="3" convert="1" fnc="3" iec="iec40107" description="左偏航"/>
+        <point name="CMD_YAW_RIGHT" address="108" group="5" category="yaw_ctrl" showIndex="23"
+               dataType="3" convert="1" fnc="3" iec="iec40108" description="右偏航"/>
+        <point name="CMD_SIDE_WIND" address="139" group="5" category="yaw_ctrl" showIndex="23"
+               dataType="3" convert="1" fnc="2" iec="iec40139" description="侧风偏航控制"/>
+    </category>
+    
+    <!-- ==================== 控制命令 - 机舱 ==================== -->
+    <!-- <category name="nacelle_ctrl" displayName="机舱控制">
+        <point name="CMD_HYDRAULIC_PUMP" address="109" group="5" category="nacelle_ctrl" showIndex="19"
+               dataType="3" convert="1" fnc="3" iec="iec40109" description="液压泵"/>
+        <point name="CMD_LUBE_PUMP" address="111" group="5" category="nacelle_ctrl" showIndex="19"
+               dataType="3" convert="1" fnc="3" iec="iec40111" description="发电机润滑泵"/>
+        <point name="CMD_YAW_LUBE" address="138" group="5" category="nacelle_ctrl" showIndex="19"
+               dataType="3" convert="1" fnc="3" iec="iec40138" description="偏航润滑启动"/>
+    </category> -->
+    
+    <!-- ==================== 控制命令 - 功率 ==================== -->
+    <category name="power_ctrl" displayName="功率控制">
+        <point name="CMD_ACTIVE_POWER_SET" address="123" group="5" category="power_ctrl" showIndex="21"
+               dataType="1" convert="1" unit="kW" fnc="4" iec="iec40123" description="有功设定"/>
+        <point name="CMD_REACTIVE_POWER_SET" address="124" group="5" category="power_ctrl" showIndex="21"
+               dataType="1" convert="1" unit="kVar" fnc="4" iec="iec40124" description="无功设定"/>
+    </category>
+    
+</pointtable>
